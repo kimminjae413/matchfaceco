@@ -1,6 +1,7 @@
 // 랜딩페이지 최상위 조립 — 섹션 순서를 정의한다.
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import CinematicBand from './components/CinematicBand'
 import Problem from './components/Problem'
 import Features from './components/Features'
 import Formula from './components/Formula'
@@ -17,6 +18,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <CinematicBand />
         <Problem />
         <Features />
         <Formula />
