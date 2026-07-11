@@ -9,8 +9,9 @@ export default function Problem() {
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce} className="max-w-3xl">
           <motion.span variants={fadeUp} className="eyebrow">The Problem</motion.span>
           <motion.h2 variants={fadeUp} className="mt-4 text-balance text-[30px] font-bold leading-[1.18] tracking-tight text-ink sm:text-[40px]">
-            같은 제품이라도, 어느 공장에서 만드느냐에 따라
-            탄소가 달라집니다. 그런데 그걸 판단할 데이터가 없었죠.
+            같은 제품이라도,<br />
+            어느 공장에서 만드느냐에 따라 탄소가 달라집니다.<br />
+            그런데 그걸 판단할 데이터가 없었죠.
           </motion.h2>
         </motion.div>
 

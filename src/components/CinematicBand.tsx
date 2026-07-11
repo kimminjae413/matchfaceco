@@ -51,7 +51,7 @@ export default function CinematicBand() {
         </h2>
 
         <p className="mt-7 max-w-md text-[15px] leading-relaxed text-paper/85 drop-shadow-[0_1px_12px_rgba(5,16,12,0.7)] sm:text-[17px]">
-          탄소를 줄이는 일은 결국, 자연을 지키는 일입니다.<br className="hidden sm:block" />
+          탄소를 줄이는 일은 결국, 자연을 지키는 일입니다.<br />
           데이터로 더 푸른 제조를 설계합니다.
         </p>
       </motion.div>
