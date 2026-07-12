@@ -66,12 +66,14 @@ export const features = [
   },
 ]
 
-// 대시보드 쇼케이스 지표 (BI page11 재현)
+// 대시보드 쇼케이스 지표 — 생산 파이프라인(시제품→양산→검수→물류→PCF→리포트) 상태 예시.
+// 실적성 허수(누적 매칭액 등) 대신, 제품이 실제로 보여주는 운영 상태를 예시 데이터로 표현.
+// 다른 섹션(히어로·VisualBand)의 30곳·18.6% 같은 대표 수치와 중복되지 않도록 의도적으로 분리.
 export const dashboardMetrics = [
-  { label: '진행 중 매칭', value: 128, suffix: '', delta: '+12.5%', hero: true },
-  { label: '네트워크 제조사', value: 110, suffix: '곳', delta: '+7.2%' },
-  { label: '평균 탄소 저감', value: 18.6, suffix: '%', delta: '+2.3%' },
-  { label: '누적 매칭 금액', value: 1240, suffix: '억', delta: '+8.1%' },
+  { label: '양산 진행', value: 6, suffix: '건', delta: '진행중', hero: true },
+  { label: '검수 대기', value: 3, suffix: '건', delta: 'QC' },
+  { label: 'PCF 산정 완료', value: 9, suffix: '건', delta: 'ISO' },
+  { label: '리포트 생성', value: 4, suffix: '건', delta: 'CBAM' },
 ]
 
 export const emissionBars = [

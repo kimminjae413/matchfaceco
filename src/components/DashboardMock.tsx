@@ -73,15 +73,20 @@ export default function DashboardMock() {
           <span>리포트</span>
         </nav>
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-signal" />
-          <span className="font-mono text-[11px] text-cool">live</span>
+          <span className="h-2 w-2 rounded-full bg-cool/50" />
+          <span className="font-mono text-[11px] text-cool">preview</span>
         </div>
       </div>
 
       <div className="space-y-4 p-4 sm:p-5">
-        <div>
-          <h3 className="text-[15px] font-bold text-ink">제조 현황 개요</h3>
-          <p className="text-[12px] text-cool">우리 제조 네트워크의 실시간 인사이트</p>
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h3 className="text-[15px] font-bold text-ink">생산 · 탄소 현황</h3>
+            <p className="text-[12px] text-cool">시제품 → 양산 → 검수 → 물류, PCF까지 한 화면에서</p>
+          </div>
+          <span className="shrink-0 rounded-full border border-ink/10 bg-white px-2 py-0.5 font-mono text-[10px] text-cool">
+            예시 데이터
+          </span>
         </div>
 
         {/* KPI 4 */}
@@ -149,7 +154,7 @@ export default function DashboardMock() {
             <span className="font-mono text-[10px] text-cool">Recent Matches</span>
           </div>
           <div className="overflow-hidden">
-            <RecentRow project="Eco Packaging RFQ" product="EPP-1024" qty="120,000 EA" factory="GreenFactory" cut="18.6%" done />
+            <RecentRow project="Eco Packaging RFQ" product="EPP-1024" qty="120,000 EA" factory="GreenFactory" cut="16.2%" done />
             <RecentRow project="Injection Mold B" product="PP-3391" qty="48,000 EA" factory="Hanoi Precision" cut="12.4%" />
             <RecentRow project="Textile Line 2" product="TX-0072" qty="9,500 M" factory="Da Nang Weave" cut="21.0%" done />
           </div>

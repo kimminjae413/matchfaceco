@@ -14,7 +14,7 @@ export default function Platform() {
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 text-[16px] leading-relaxed text-ink/65">
             공장별 설비 효율 DB와 생산 조건을 자동 매핑해, 별도 측정 장비 없이 탄소·에너지 지표를 실시간으로 제공합니다.
-            아래는 실제 운영 대시보드의 모습입니다.
+            아래는 제품 대시보드 미리보기입니다. <span className="text-cool">(예시 데이터)</span>
           </motion.p>
         </motion.div>
 
