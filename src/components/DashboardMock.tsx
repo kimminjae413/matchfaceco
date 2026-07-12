@@ -63,7 +63,7 @@ export default function DashboardMock() {
       {/* 목업 상단바 */}
       <div className="flex items-center justify-between border-b border-ink/8 bg-white/80 px-5 py-3">
         <div className="flex items-center gap-3">
-          <Wordmark className="text-[17px]" />
+          <Wordmark className="h-[15px] w-auto" />
           <span className="hidden font-mono text-[11px] text-cool sm:inline">/ dashboard</span>
         </div>
         <nav className="hidden items-center gap-4 text-[12px] text-cool md:flex">
