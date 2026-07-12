@@ -106,19 +106,23 @@ export default function Hero() {
 
           <motion.div {...rise(0.24)} className="mt-8 flex flex-wrap items-center gap-3">
             <a
-              href={`mailto:${brand.email}?subject=matchfac eco 데모/도입 문의`}
+              href={`mailto:${brand.email}?subject=matchfac eco 베타 신청`}
               className="group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-transform hover:scale-[1.02]"
             >
-              데모 요청하기
+              베타 신청하기
               <IconArrow className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href="#features"
+              href="#how"
               className="inline-flex items-center gap-2 rounded-full border border-paper/20 px-6 py-3.5 text-[15px] font-semibold text-paper transition-colors hover:border-paper/40"
             >
-              어떻게 작동하나요
+              어떻게 계산하나요
             </a>
           </motion.div>
+
+          <motion.p {...rise(0.28)} className="mt-4 font-mono text-[12px] text-paper/45">
+            2026 Q3 베타 오픈 · 파운딩 파트너 모집 중
+          </motion.p>
 
           {/* 지표 칩 */}
           <motion.div {...rise(0.32)} className="mt-10 flex flex-wrap gap-x-8 gap-y-4 border-t border-paper/10 pt-6">

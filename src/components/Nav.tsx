@@ -6,7 +6,7 @@ import { brand } from '../content'
 
 const links = [
   { href: '#features', label: '핵심 기능' },
-  { href: '#how', label: '작동 방식' },
+  { href: '#how', label: '방법론' },
   { href: '#platform', label: '플랫폼' },
   { href: '#why', label: '차별점' },
 ]
@@ -44,12 +44,12 @@ export default function Nav() {
           ))}
         </nav>
         <a
-          href={`mailto:${brand.email}?subject=matchfac eco 도입 문의`}
+          href={`mailto:${brand.email}?subject=matchfac eco 베타 신청`}
           className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold transition-colors ${
             scrolled ? 'bg-ink text-paper hover:bg-deep' : 'bg-signal text-ink hover:bg-signal/90'
           }`}
         >
-          문의하기
+          베타 신청
           <IconArrow className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </a>
       </div>
