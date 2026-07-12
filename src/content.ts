@@ -70,10 +70,10 @@ export const features = [
 // 실적성 허수(누적 매칭액 등) 대신, 제품이 실제로 보여주는 운영 상태를 예시 데이터로 표현.
 // 다른 섹션(히어로·VisualBand)의 30곳·18.6% 같은 대표 수치와 중복되지 않도록 의도적으로 분리.
 export const dashboardMetrics = [
-  { label: '양산 진행', value: 6, suffix: '건', delta: '진행중', hero: true },
-  { label: '검수 대기', value: 3, suffix: '건', delta: 'QC' },
-  { label: 'PCF 산정 완료', value: 9, suffix: '건', delta: 'ISO' },
-  { label: '리포트 생성', value: 4, suffix: '건', delta: 'CBAM' },
+  { label: '진행 중 매칭', value: 24, suffix: '건', delta: '진행중', hero: true },
+  { label: '검수 통과', value: 42, suffix: '건', delta: '검수완료' },
+  { label: 'PCF 산정 완료', value: 156, suffix: '건', delta: 'ISO 14067' },
+  { label: '리포트 발행', value: 89, suffix: '건', delta: 'CBAM' },
 ]
 
 export const emissionBars = [
