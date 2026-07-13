@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예시 산정서 — 제품탄소발자국(PCF) | matchfac eco</title>
+    <meta
+      name="description"
+      content="matchfac eco가 발행하는 ISO 14067 기반 제품탄소발자국 산정서의 서식 예시입니다. 산정 경계·활동자료·배출계수 출처·산정 결과를 한 장에 담습니다."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <style>
+      /* BI 팔레트 — 랜딩(tailwind.config.js)과 동일한 값. 임의 재현 금지. */
+      :root {
+        --ink: #083630;
+        --deep: #084e3a;
+        --signal: #31ec57;
+        --signal-dim: #22b845;
+        --cool: #767c86;
+        --paper: #f6f8f4;
+        --rule: rgba(8, 54, 48, 0.12);
+        --rule-soft: rgba(8, 54, 48, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .display {
+        font-family: 'Wanted Sans Variable', Pretendard, system-ui, sans-serif;
+        letter-spacing: -0.03em;
+      }
+
+      .tabular {
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* 화면 상단 도구 막대 — 인쇄 시에는 사라진다 */
+      .bar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 24px;
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .bar a.back {
+        color: rgba(246, 248, 244, 0.7);
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .bar a.back:hover {
+        color: var(--paper);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .bar .actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .bar button {
+        border: 0;
+        border-radius: 999px;
+        background: var(--signal);
+        color: var(--ink);
+        padding: 10px 20px;
+        font: inherit;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .bar button:hover {
+        background: var(--signal-dim);
+      }
+
+      .bar .cta {
+        color: rgba(246, 248, 244, 0.7);
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .bar .cta:hover {
+        color: var(--paper);
+      }
+
+      /* 문서 — 지면 위에 놓인 한 장 */
+      .sheet {
+        max-width: 860px;
+        margin: 32px auto 64px;
+        background: #fff;
+        padding: 56px 56px 48px;
+        box-shadow: 0 2px 4px rgba(8, 54, 48, 0.05), 0 28px 60px -24px rgba(8, 54, 48, 0.28);
+      }
+
+      /* 예시 문서라는 사실을 문서 자체가 먼저 말한다.
+         제조사명·수치가 실물처럼 보이므로, 실제 발행본으로 오독되면 안 된다. */
+      .notice {
+        display: flex;
+        gap: 12px;
+        border: 1px solid var(--rule);
+        border-left: 3px solid var(--ink);
+        padding: 14px 16px;
+        margin-bottom: 40px;
+        font-size: 13px;
+        line-height: 1.65;
+        color: rgba(8, 54, 48, 0.72);
+      }
+      .notice b {
+        color: var(--ink);
+      }
+
+      header.doc {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 20px;
+      }
+
+      header.doc img {
+        height: 18px;
+        width: auto;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .title h1 {
+        font-size: 22px;
+        font-weight: 800;
+      }
+
+      .tag {
+        border-radius: 999px;
+        background: rgba(8, 54, 48, 0.05);
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        color: rgba(8, 54, 48, 0.5);
+      }
+
+      .sub {
+        margin-top: 5px;
+        font-size: 13px;
+        color: var(--cool);
+      }
+
+      .meta {
+        flex-shrink: 0;
+        text-align: right;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--cool);
+      }
+
+      section {
+        margin-top: 40px;
+      }
+
+      .label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--cool);
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      dl.spec {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      dl.spec > div {
+        border-bottom: 1px solid var(--rule-soft);
+        padding: 14px 0;
+      }
+      dl.spec dt {
+        font-size: 12px;
+        color: var(--cool);
+      }
+      dl.spec dd {
+        margin-top: 3px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 12px 8px;
+        font-size: 13px;
+      }
+      th {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--cool);
+        text-align: right;
+        border-bottom: 1px solid var(--rule);
+      }
+      th:first-child,
+      td:first-child {
+        text-align: left;
+        padding-left: 0;
+      }
+      td {
+        text-align: right;
+        border-bottom: 1px solid var(--rule-soft);
+        color: rgba(8, 54, 48, 0.72);
+      }
+      td:last-child,
+      th:last-child {
+        padding-right: 0;
+      }
+      tr.pick {
+        background: rgba(49, 236, 87, 0.09);
+      }
+      tr.pick td {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .pick-mark {
+        margin-left: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--signal-dim);
+      }
+      tfoot td {
+        border-bottom: 0;
+        border-top: 1px solid var(--rule);
+        color: var(--cool);
+        font-size: 12px;
+      }
+
+      /* 산정 결과 — 이 문서의 결론 */
+      .result {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+        border-top: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+        margin-top: 40px;
+        padding: 28px 0;
+      }
+      .result .big {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        margin-top: 6px;
+      }
+      .result .big span:first-child {
+        font-size: 44px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+      .result .big span:last-child {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--signal-dim);
+      }
+      .result .k {
+        font-size: 12px;
+        color: var(--cool);
+      }
+      .result .side {
+        text-align: right;
+        font-size: 13px;
+        line-height: 1.9;
+        color: rgba(8, 54, 48, 0.72);
+      }
+      .result .side b {
+        font-weight: 600;
+      }
+
+      ul.notes {
+        list-style: none;
+        margin-top: 14px;
+      }
+      ul.notes li {
+        position: relative;
+        padding-left: 14px;
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: rgba(8, 54, 48, 0.7);
+      }
+      ul.notes li::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--cool);
+      }
+
+      footer.doc {
+        margin-top: 44px;
+        border-top: 1px solid var(--rule);
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--cool);
+      }
+      footer.doc b {
+        color: rgba(8, 54, 48, 0.75);
+        font-weight: 600;
+      }
+
+      @media (max-width: 720px) {
+        .sheet {
+          margin: 20px 16px 40px;
+          padding: 32px 24px;
+        }
+        dl.spec {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .result,
+        header.doc,
+        footer.doc {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .result .side,
+        .meta {
+          text-align: left;
+        }
+      }
+
+      /* 인쇄 = 이 제품의 산출물. 브라우저 '인쇄 → PDF로 저장'이 곧 산정서 PDF다. */
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .bar {
+          display: none;
+        }
+        .sheet {
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          max-width: none;
+        }
+        tr.pick {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="/">← matchfac eco</a>
+      <div class="actions">
+        <a class="cta" href="/#contact">베타 신청하기</a>
+        <button type="button" onclick="window.print()">인쇄 · PDF로 저장</button>
+      </div>
+    </div>
+
+    <article class="sheet">
+      <div class="notice">
+        <div>
+          <b>이 문서는 서식 예시입니다.</b> 산정서가 어떤 항목을 어떤 근거로 담는지 보여주기 위한
+          가상의 사례이며, 실제 발행된 산정서가 아닙니다. 아래의 제조사명·활동자료·산정 결과는
+          예시 값입니다. 산정 방법론과 배출계수 출처는 실제 적용 기준과 동일합니다.
+        </div>
+      </div>
+
+      <header class="doc">
+        <div>
+          <img src="/brand/wordmark-dark.png" alt="matchfac eco" />
+          <div class="title">
+            <h1 class="display">제품탄소발자국 산정서</h1>
+            <span class="tag">예시</span>
+          </div>
+          <div class="sub">ISO 14067 · Scope 2 + Scope 3(물류 일부)</div>
+        </div>
+        <div class="meta">
+          <div class="tabular">PCF-2026-0413</div>
+          <div>발행 matchfac eco</div>
+          <div>서식 예시 · 실제 발행본 아님</div>
+        </div>
+      </header>
+
+      <section>
+        <div class="label">1. 산정 대상</div>
+        <dl class="spec">
+          <div><dt>공정</dt><dd>사출</dd></div>
+          <div><dt>소재</dt><dd>PP (폴리프로필렌)</dd></div>
+          <div><dt>제품 중량</dt><dd class="tabular">0.110 kg / EA</dd></div>
+          <div><dt>수량</dt><dd class="tabular">120,000 EA</dd></div>
+        </dl>
+        <ul class="notes">
+          <li>
+            <b>산정 경계</b> : 제조 단계 전력(Scope 2) + 원료 소재(Scope 3) + 출하 물류(Scope 3,
+            해상). 사용·폐기 단계는 경계 밖으로 두는 경량 PCF 로직입니다.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">2. 제조사 비교 — 베트남 30곳+ 스캔</div>
+        <table>
+          <thead>
+            <tr>
+              <th>제조사</th>
+              <th>전력원단위 (kWh/1k EA)</th>
+              <th>재생에너지 비중</th>
+              <th>PCF (kgCO₂e/EA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="pick">
+              <td>GreenFactory Bình Dương<span class="pick-mark">선정</span></td>
+              <td class="tabular">412</td>
+              <td class="tabular">38%</td>
+              <td class="tabular">0.42</td>
+            </tr>
+            <tr>
+              <td>Long An Precision</td>
+              <td class="tabular">486</td>
+              <td class="tabular">12%</td>
+              <td class="tabular">0.49</td>
+            </tr>
+            <tr>
+              <td>Đồng Nai Molding</td>
+              <td class="tabular">523</td>
+              <td class="tabular">0%</td>
+              <td class="tabular">0.56</td>
+            </tr>
+            <tr>
+              <td>Hải Phòng Industrial</td>
+              <td class="tabular">571</td>
+              <td class="tabular">5%</td>
+              <td class="tabular">0.62</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>동일 공정 업계 평균</td>
+              <td class="tabular">—</td>
+              <td class="tabular">—</td>
+              <td class="tabular">0.516</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <section>
+        <div class="label">3. 산정 내역 — 선정 제조사 기준</div>
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>활동자료</th>
+              <th>배출계수</th>
+              <th>배출량 (kgCO₂e/EA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>전력 (Scope 2)</td>
+              <td class="tabular">0.2554 kWh / EA<br /><span style="font-size: 12px; color: var(--cool)">전력 0.412 kWh 중 재생 38% 차감</span></td>
+              <td class="tabular">0.6592 kgCO₂e/kWh</td>
+              <td class="tabular">0.168</td>
+            </tr>
+            <tr>
+              <td>소재 (Scope 3)</td>
+              <td class="tabular">PP 0.110 kg / EA</td>
+              <td class="tabular">1.95 kgCO₂e/kg</td>
+              <td class="tabular">0.215</td>
+            </tr>
+            <tr>
+              <td>물류 (Scope 3)</td>
+              <td class="tabular">해상 · 호치민 → 부산</td>
+              <td class="tabular">운송수단별 계수</td>
+              <td class="tabular">0.037</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><b style="color: var(--ink); font-weight: 600">합계</b></td>
+              <td></td>
+              <td></td>
+              <td class="tabular" style="color: var(--ink); font-weight: 700; font-size: 14px">0.420</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <div class="result">
+        <div>
+          <div class="k">동일 공정 업계 평균 대비</div>
+          <div class="big display">
+            <span class="tabular">−18.6</span><span>%</span>
+          </div>
+        </div>
+        <div class="side">
+          <div>제품 단위 <b class="tabular">0.420 kgCO₂e / EA</b></div>
+          <div>총 배출량 (120,000 EA) <b class="tabular">50.4 tCO₂e</b></div>
+          <div>업계 평균 대비 저감 <b class="tabular">11.5 tCO₂e</b></div>
+        </div>
+      </div>
+
+      <section>
+        <div class="label">4. 배출계수 출처</div>
+        <ul class="notes">
+          <li>
+            <b>전력 — 베트남</b> : 천연자원환경부 기후변화국(Cục Biến đổi khí hậu) 공표 국가 전력망
+            배출계수. 최신 확정치 <b class="tabular">0.6592 tCO₂/MWh</b> (2023년 기준, 공문
+            1726/BĐKH-PTCBT). 계수는 매년 갱신되며, 산정 시점의 최신 공표치를 적용합니다.
+          </li>
+          <li><b>소재</b> : 소재별 탄소계수 DB (PP · PE · ABS 등)</li>
+          <li><b>물류</b> : 운송수단별 배출계수 (해상 · 항공 · 육상)</li>
+          <li>
+            재생에너지 비중은 제조사가 제출한 전력 조달 자료를 근거로 차감하며, 증빙이 없는 경우
+            0%로 보수적으로 처리합니다.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">5. 적용 표준 및 한계</div>
+        <ul class="notes">
+          <li><b>ISO 14067</b> — 제품단위 탄소배출량 산정 기준</li>
+          <li><b>GHG Protocol</b> — 관련성 · 완전성 · 일관성 · 투명성 · 정확성</li>
+          <li><b>CBAM</b> — 탄소국경조정제도 제출 형식 대응</li>
+          <li>
+            전주기(LCA) 전체가 아니라 탄소 비중이 큰 제조·물류 단계에 집중한 경량 PCF입니다.
+            사용·폐기 단계를 포함해야 하는 공시에는 별도 확장이 필요합니다.
+          </li>
+          <li>제3자 검증기관의 검증을 받은 문서가 아닙니다. 검증이 필요한 경우 별도 절차를 안내합니다.</li>
+        </ul>
+      </section>
+
+      <footer class="doc">
+        <div>
+          <b>㈜제로투백 (Zeroto100 INC.)</b><br />
+          대전광역시 서구 정림동로7번길 28-12, 3층<br />
+          사업자등록번호 142-88-03653
+        </div>
+        <div style="text-align: right">
+          zeroto100.kr@gmail.com<br />
+          matchfaceco.com<br />
+          <b>Your cost. Our carbon mission.</b>
+        </div>
+      </footer>
+    </article>
+  </body>
+</html>

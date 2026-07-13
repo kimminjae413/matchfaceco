@@ -63,7 +63,15 @@ export default function Hero() {
           {...(reduce ? {} : { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.6, delay: 0.15 } })}
         >
           <ReportSheet />
+          {/* 구매자가 진짜 보고 싶은 건 설명이 아니라 산정서 한 장이다 — 바로 열어준다. */}
           <p className="mt-4 text-center text-[12px] text-paper/40">
+            <a
+              href="/sample-report/"
+              className="font-medium text-paper/60 underline underline-offset-4 transition-colors hover:text-paper"
+            >
+              예시 산정서 전체 보기
+            </a>
+            <span className="mx-2 text-paper/25">·</span>
             {brand.taglineEn}
           </p>
         </motion.div>

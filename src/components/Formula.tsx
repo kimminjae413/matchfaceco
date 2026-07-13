@@ -80,6 +80,15 @@ export default function Formula() {
                   </div>
                 ))}
               </dl>
+
+              {/* 설명을 열 줄 읽는 것보다 산정서 한 장을 보는 게 빠르다 */}
+              <a
+                href="/sample-report/"
+                className="mt-10 inline-flex items-center gap-2 text-[15px] font-semibold text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink"
+              >
+                예시 산정서 한 장 보기
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
         </motion.div>
