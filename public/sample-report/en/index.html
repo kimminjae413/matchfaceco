@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample Report — Product Carbon Footprint | matchfac eco</title>
+    <meta
+      name="description"
+      content="A format sample of the ISO 14067 product carbon footprint report issued by matchfac eco: boundary, activity data, emission factor sources and results on one page."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <style>
+      /* BI 팔레트 — 한국어판(/sample-report/)과 동일. 임의 재현 금지. */
+      :root {
+        --ink: #083630;
+        --deep: #084e3a;
+        --signal: #31ec57;
+        --signal-dim: #22b845;
+        --cool: #767c86;
+        --paper: #f6f8f4;
+        --rule: rgba(8, 54, 48, 0.12);
+        --rule-soft: rgba(8, 54, 48, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .display {
+        font-family: 'Wanted Sans Variable', Pretendard, system-ui, sans-serif;
+        letter-spacing: -0.03em;
+      }
+
+      .tabular {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .bar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 24px;
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .bar a.back {
+        color: rgba(246, 248, 244, 0.7);
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .bar a.back:hover {
+        color: var(--paper);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .bar .actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .bar button {
+        border: 0;
+        border-radius: 999px;
+        background: var(--signal);
+        color: var(--ink);
+        padding: 10px 20px;
+        font: inherit;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .bar button:hover {
+        background: var(--signal-dim);
+      }
+
+      .bar .cta {
+        color: rgba(246, 248, 244, 0.7);
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .bar .cta:hover {
+        color: var(--paper);
+      }
+
+      .sheet {
+        max-width: 860px;
+        margin: 32px auto 64px;
+        background: #fff;
+        padding: 56px 56px 48px;
+        box-shadow: 0 2px 4px rgba(8, 54, 48, 0.05), 0 28px 60px -24px rgba(8, 54, 48, 0.28);
+      }
+
+      /* 예시 문서라는 사실을 문서 자체가 먼저 말한다 — 실물로 오독되면 안 된다. */
+      .notice {
+        display: flex;
+        gap: 12px;
+        border: 1px solid var(--rule);
+        border-left: 3px solid var(--ink);
+        padding: 14px 16px;
+        margin-bottom: 40px;
+        font-size: 13px;
+        line-height: 1.65;
+        color: rgba(8, 54, 48, 0.72);
+      }
+      .notice b {
+        color: var(--ink);
+      }
+
+      header.doc {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 20px;
+      }
+
+      header.doc img {
+        height: 18px;
+        width: auto;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .title h1 {
+        font-size: 22px;
+        font-weight: 800;
+      }
+
+      .tag {
+        border-radius: 999px;
+        background: rgba(8, 54, 48, 0.05);
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        color: rgba(8, 54, 48, 0.5);
+      }
+
+      .sub {
+        margin-top: 5px;
+        font-size: 13px;
+        color: var(--cool);
+      }
+
+      .meta {
+        flex-shrink: 0;
+        text-align: right;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--cool);
+      }
+
+      section {
+        margin-top: 40px;
+      }
+
+      .label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--cool);
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      dl.spec {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      dl.spec > div {
+        border-bottom: 1px solid var(--rule-soft);
+        padding: 14px 0;
+      }
+      dl.spec dt {
+        font-size: 12px;
+        color: var(--cool);
+      }
+      dl.spec dd {
+        margin-top: 3px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 12px 8px;
+        font-size: 13px;
+      }
+      th {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--cool);
+        text-align: right;
+        border-bottom: 1px solid var(--rule);
+      }
+      th:first-child,
+      td:first-child {
+        text-align: left;
+        padding-left: 0;
+      }
+      td {
+        text-align: right;
+        border-bottom: 1px solid var(--rule-soft);
+        color: rgba(8, 54, 48, 0.72);
+      }
+      td:last-child,
+      th:last-child {
+        padding-right: 0;
+      }
+      tr.pick {
+        background: rgba(49, 236, 87, 0.09);
+      }
+      tr.pick td {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .pick-mark {
+        margin-left: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--signal-dim);
+      }
+      tfoot td {
+        border-bottom: 0;
+        border-top: 1px solid var(--rule);
+        color: var(--cool);
+        font-size: 12px;
+      }
+
+      .result {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+        border-top: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+        margin-top: 40px;
+        padding: 28px 0;
+      }
+      .result .big {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        margin-top: 6px;
+      }
+      .result .big span:first-child {
+        font-size: 44px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+      .result .big span:last-child {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--signal-dim);
+      }
+      .result .k {
+        font-size: 12px;
+        color: var(--cool);
+      }
+      .result .side {
+        text-align: right;
+        font-size: 13px;
+        line-height: 1.9;
+        color: rgba(8, 54, 48, 0.72);
+      }
+      .result .side b {
+        font-weight: 600;
+      }
+
+      ul.notes {
+        list-style: none;
+        margin-top: 14px;
+      }
+      ul.notes li {
+        position: relative;
+        padding-left: 14px;
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: rgba(8, 54, 48, 0.7);
+      }
+      ul.notes li::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--cool);
+      }
+
+      footer.doc {
+        margin-top: 44px;
+        border-top: 1px solid var(--rule);
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--cool);
+      }
+      footer.doc b {
+        color: rgba(8, 54, 48, 0.75);
+        font-weight: 600;
+      }
+
+      @media (max-width: 720px) {
+        .sheet {
+          margin: 20px 16px 40px;
+          padding: 32px 24px;
+        }
+        dl.spec {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .result,
+        header.doc,
+        footer.doc {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .result .side,
+        .meta {
+          text-align: left;
+        }
+      }
+
+      /* 인쇄 = 이 제품의 산출물. 브라우저 'Print → Save as PDF'가 곧 산정서 PDF다. */
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .bar {
+          display: none;
+        }
+        .sheet {
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          max-width: none;
+        }
+        tr.pick {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="/?lang=en">← matchfac eco</a>
+      <div class="actions">
+        <a class="cta" href="/?lang=en#contact">Join the beta</a>
+        <button type="button" onclick="window.print()">Print · Save as PDF</button>
+      </div>
+    </div>
+
+    <article class="sheet">
+      <div class="notice">
+        <div>
+          <b>This is a format sample.</b> It exists to show what the report contains and on what
+          evidence — it is not an issued report. The manufacturer names, activity data and results
+          below are illustrative. The methodology and emission factor sources are the real ones.
+        </div>
+      </div>
+
+      <header class="doc">
+        <div>
+          <img src="/brand/wordmark-dark.png" alt="matchfac eco" />
+          <div class="title">
+            <h1 class="display">Product Carbon Footprint Report</h1>
+            <span class="tag">Sample</span>
+          </div>
+          <div class="sub">ISO 14067 · Scope 2 + partial Scope 3 (logistics)</div>
+        </div>
+        <div class="meta">
+          <div class="tabular">PCF-2026-0413</div>
+          <div>Issued by matchfac eco</div>
+          <div>Format sample · not an issued report</div>
+        </div>
+      </header>
+
+      <section>
+        <div class="label">1. Scope of assessment</div>
+        <dl class="spec">
+          <div><dt>Process</dt><dd>Injection molding</dd></div>
+          <div><dt>Material</dt><dd>PP (polypropylene)</dd></div>
+          <div><dt>Unit weight</dt><dd class="tabular">0.110 kg / EA</dd></div>
+          <div><dt>Volume</dt><dd class="tabular">120,000 EA</dd></div>
+        </dl>
+        <ul class="notes">
+          <li>
+            <b>Boundary</b> : manufacturing electricity (Scope 2) + raw material (Scope 3) + outbound
+            sea freight (Scope 3). Use and end-of-life stages sit outside the boundary — this is a
+            lightweight PCF, not a full LCA.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">2. Manufacturer comparison — scanned across 30+ plants in Vietnam</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Manufacturer</th>
+              <th>Power intensity (kWh/1k EA)</th>
+              <th>Renewable share</th>
+              <th>PCF (kgCO₂e/EA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="pick">
+              <td>GreenFactory Bình Dương<span class="pick-mark">selected</span></td>
+              <td class="tabular">412</td>
+              <td class="tabular">38%</td>
+              <td class="tabular">0.42</td>
+            </tr>
+            <tr>
+              <td>Long An Precision</td>
+              <td class="tabular">486</td>
+              <td class="tabular">12%</td>
+              <td class="tabular">0.49</td>
+            </tr>
+            <tr>
+              <td>Đồng Nai Molding</td>
+              <td class="tabular">523</td>
+              <td class="tabular">0%</td>
+              <td class="tabular">0.56</td>
+            </tr>
+            <tr>
+              <td>Hải Phòng Industrial</td>
+              <td class="tabular">571</td>
+              <td class="tabular">5%</td>
+              <td class="tabular">0.62</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Industry average, same process</td>
+              <td class="tabular">—</td>
+              <td class="tabular">—</td>
+              <td class="tabular">0.516</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <section>
+        <div class="label">3. Calculation — selected manufacturer</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Activity data</th>
+              <th>Emission factor</th>
+              <th>Emissions (kgCO₂e/EA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Electricity (Scope 2)</td>
+              <td class="tabular">
+                0.2554 kWh / EA<br />
+                <span style="font-size: 12px; color: var(--cool)"
+                  >0.412 kWh less 38% renewable</span
+                >
+              </td>
+              <td class="tabular">0.6592 kgCO₂e/kWh</td>
+              <td class="tabular">0.168</td>
+            </tr>
+            <tr>
+              <td>Material (Scope 3)</td>
+              <td class="tabular">PP 0.110 kg / EA</td>
+              <td class="tabular">1.95 kgCO₂e/kg</td>
+              <td class="tabular">0.215</td>
+            </tr>
+            <tr>
+              <td>Logistics (Scope 3)</td>
+              <td class="tabular">Sea · Ho Chi Minh → Busan</td>
+              <td class="tabular">Factor by transport mode</td>
+              <td class="tabular">0.037</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><b style="color: var(--ink); font-weight: 600">Total</b></td>
+              <td></td>
+              <td></td>
+              <td class="tabular" style="color: var(--ink); font-weight: 700; font-size: 14px">
+                0.420
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <div class="result">
+        <div>
+          <div class="k">vs. industry average, same process</div>
+          <div class="big display"><span class="tabular">−18.6</span><span>%</span></div>
+        </div>
+        <div class="side">
+          <div>Per unit <b class="tabular">0.420 kgCO₂e / EA</b></div>
+          <div>Total (120,000 EA) <b class="tabular">50.4 tCO₂e</b></div>
+          <div>Reduction vs. average <b class="tabular">11.5 tCO₂e</b></div>
+        </div>
+      </div>
+
+      <section>
+        <div class="label">4. Emission factor sources</div>
+        <ul class="notes">
+          <li>
+            <b>Electricity — Vietnam</b> : national grid emission factor published by the Department
+            of Climate Change (Cục Biến đổi khí hậu), MONRE. Latest confirmed value
+            <b class="tabular">0.6592 tCO₂/MWh</b> (for 2023, official letter 1726/BĐKH-PTCBT). The
+            factor is updated annually; we apply the latest published value at the time of
+            calculation.
+          </li>
+          <li><b>Materials</b> : material carbon factor database (PP · PE · ABS and others)</li>
+          <li><b>Logistics</b> : emission factors by transport mode (sea · air · road)</li>
+          <li>
+            Renewable share is deducted only against the plant's documented power procurement. Where
+            no evidence exists, we conservatively treat it as 0%.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">5. Standards and limitations</div>
+        <ul class="notes">
+          <li><b>ISO 14067</b> — product-level carbon footprint quantification</li>
+          <li><b>GHG Protocol</b> — relevance · completeness · consistency · transparency · accuracy</li>
+          <li><b>CBAM</b> — reporting format for the EU carbon border mechanism</li>
+          <li>
+            This is a lightweight PCF focused on manufacturing and logistics, not a full life-cycle
+            assessment. Disclosures that must include the use and end-of-life stages require an
+            extended boundary.
+          </li>
+          <li>
+            This document has not been verified by a third-party verification body. Where
+            verification is required, a separate process applies.
+          </li>
+        </ul>
+      </section>
+
+      <footer class="doc">
+        <div>
+          <b>Zeroto100 INC.</b><br />
+          3F, 28-12 Jeongnimdong-ro 7beon-gil, Seo-gu, Daejeon, Republic of Korea<br />
+          Business reg. no. 142-88-03653
+        </div>
+        <div style="text-align: right">
+          zeroto100.kr@gmail.com<br />
+          matchfaceco.com<br />
+          <b>Your cost. Our carbon mission.</b>
+        </div>
+      </footer>
+    </article>
+  </body>
+</html>

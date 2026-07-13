@@ -8,8 +8,9 @@ import { fade, viewportOnce } from '../lib/motion'
 import { comparison } from '../content'
 
 function Cell({ v, own }: { v: string | boolean; own: boolean }) {
-  if (v === true) return <span className={own ? 'font-semibold text-ink' : 'text-ink/50'}>지원</span>
-  if (v === false) return <span className="text-ink/25">없음</span>
+  if (v === true)
+    return <span className={own ? 'font-semibold text-ink' : 'text-ink/50'}>{comparison.yes}</span>
+  if (v === false) return <span className="text-ink/25">{comparison.no}</span>
   return <span className={own ? 'font-semibold text-ink' : 'text-ink/55'}>{v}</span>
 }
 
@@ -18,10 +19,10 @@ export default function Comparison() {
     <section className="border-t border-ink/10 bg-paper py-28 md:py-40">
       <div className="wrap">
         <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
-          <div className="label">차별점</div>
+          <div className="label">{comparison.label}</div>
 
           <h2 className="mt-10 max-w-3xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest text-ink sm:text-[46px]">
-            매칭 플랫폼도, ESG SaaS도 하지 못하던 일.
+            {comparison.h2}
           </h2>
 
           <div className="mt-14 overflow-x-auto">

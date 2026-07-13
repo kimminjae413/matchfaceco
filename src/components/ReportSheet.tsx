@@ -6,10 +6,10 @@
 // 문서번호까지 붙어 있어 실제 발행본으로 읽힐 수 있으므로, 예시임을 화면에 명시한다.
 // (대시보드 허수 실적을 걷어낸 것과 같은 이유 — 탄소 데이터 제품에서 실물처럼 보이는
 // 가짜는 신뢰를 정면으로 깎는다.)
-import { reportSample } from '../content'
+import { report } from '../content'
 
 export default function ReportSheet() {
-  const { docNo, spec, factories, cut } = reportSample
+  const { docNo, spec, factories, cut } = report
 
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-card-lg ring-1 ring-ink/10">
@@ -18,17 +18,18 @@ export default function ReportSheet() {
         <div>
           <div className="flex items-center gap-2">
             <span className="font-display text-[15px] font-bold tracking-tight text-ink">
-              제품탄소발자국 산정서
+              {report.title}
             </span>
             <span className="rounded-full bg-ink/5 px-2 py-0.5 text-[10px] font-medium text-ink/50">
-              예시
+              {report.sampleTag}
             </span>
           </div>
-          <div className="mt-1 text-[12px] text-cool">ISO 14067 · Scope 2 + Scope 3(물류 일부)</div>
+          <div className="mt-1 text-[12px] text-cool">{report.standard}</div>
         </div>
         <div className="shrink-0 text-right text-[11px] leading-relaxed text-cool">
           <div className="tabular">{docNo}</div>
-          <div>서식 예시 · 실제 발행본 아님</div>
+          <div>{report.issuer}</div>
+          <div>{report.notReal}</div>
         </div>
       </div>
 
@@ -46,10 +47,10 @@ export default function ReportSheet() {
       <table className="w-full border-collapse">
         <thead>
           <tr className="border-b border-ink/10 text-[11px] text-cool">
-            <th className="px-6 py-2.5 text-left font-medium">제조사 · 베트남 30곳+ 스캔</th>
-            <th className="py-2.5 text-right font-medium">kWh/1k</th>
-            <th className="py-2.5 text-right font-medium">재생E</th>
-            <th className="px-6 py-2.5 text-right font-medium">kgCO₂e/EA</th>
+            <th className="px-6 py-2.5 text-left font-medium">{report.scanned}</th>
+            <th className="py-2.5 text-right font-medium">{report.colKwh}</th>
+            <th className="py-2.5 text-right font-medium">{report.colRe}</th>
+            <th className="px-6 py-2.5 text-right font-medium">{report.colPcf}</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +65,7 @@ export default function ReportSheet() {
                 <span className={r.pick ? 'font-semibold text-ink' : 'text-ink/70'}>{r.name}</span>
                 {r.pick && (
                   <span className="ml-2 align-middle text-[10px] font-semibold text-signal-dim">
-                    선정
+                    {report.picked}
                   </span>
                 )}
               </td>
@@ -85,7 +86,7 @@ export default function ReportSheet() {
       {/* 결론 — 저감률이 이 문서의 결론이자 제품의 약속 */}
       <div className="flex items-end justify-between gap-4 border-t border-ink/10 px-6 py-5">
         <div>
-          <div className="text-[11px] text-cool">동일 공정 업계 평균 대비</div>
+          <div className="text-[11px] text-cool">{report.vsAvg}</div>
           <div className="mt-1 flex items-baseline gap-1">
             <span className="tabular font-display text-[36px] font-bold leading-none tracking-tightest text-ink">
               −{cut}
@@ -94,8 +95,8 @@ export default function ReportSheet() {
           </div>
         </div>
         <div className="shrink-0 text-right text-[11px] leading-relaxed text-cool">
-          <div>전력 배출계수 — 정부 공표 국가 계수 적용</div>
-          <div className="font-medium text-ink/70">CBAM · ESG 공시 제출 가능</div>
+          <div>{report.factorNote}</div>
+          <div className="font-medium text-ink/70">{report.complianceNote}</div>
         </div>
       </div>
     </div>

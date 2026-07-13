@@ -5,7 +5,7 @@
 // 베타 전에 156건을 산정했다는 건 성립하지 않는 숫자이고, 탄소 데이터 제품에서 이런 허수는
 // 신뢰를 정면으로 깎는다. 실적 카운트를 전부 걷어내고 기능 상태 표기로 바꾼다.
 // 이 목업이 예시 화면이라는 사실도 화면에 명시한다.
-import { dashboardStages } from '../content'
+import { platform } from '../content'
 import { Wordmark } from './Wordmark'
 
 export default function DashboardMock() {
@@ -15,17 +15,14 @@ export default function DashboardMock() {
       <div className="flex items-center justify-between gap-4 border-b border-ink/8 px-6 py-4">
         <Wordmark className="h-[15px] w-auto" />
         <span className="rounded-full bg-ink/6 px-2.5 py-1 text-[11px] font-medium text-ink/50">
-          예시 화면
+          {platform.mockTag}
         </span>
       </div>
 
       {/* 파이프라인 4단계 */}
       <div className="grid gap-px bg-ink/8 md:grid-cols-4">
-        {dashboardStages.map((s) => (
-          <div
-            key={s.label}
-            className={`p-6 ${s.hero ? 'bg-deep text-paper' : 'bg-white'}`}
-          >
+        {platform.stages.map((s) => (
+          <div key={s.label} className={`p-6 ${s.hero ? 'bg-deep text-paper' : 'bg-white'}`}>
             <div className={`text-[12px] ${s.hero ? 'text-paper/50' : 'text-cool'}`}>{s.tag}</div>
             <div
               className={`mt-2 font-display text-[19px] font-bold tracking-tight ${
@@ -47,9 +44,7 @@ export default function DashboardMock() {
 
       {/* 산출물 안내 — 이 화면의 끝에 무엇이 나오는지 */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink/8 px-6 py-5">
-        <p className="text-[13px] text-ink/60">
-          네 단계가 한 데이터 위에서 돌아가고, 마지막에 제출 가능한 산정서 한 장이 나옵니다.
-        </p>
+        <p className="text-[13px] text-ink/60">{platform.outcome}</p>
         <span className="text-[12px] font-medium text-signal-dim">ISO 14067 · CBAM</span>
       </div>
     </div>

@@ -3,7 +3,8 @@
 // 다크 면은 근접 블랙(#05100C)이 아니라 BI 딥 포레스트로 올린다 — 근접 블랙 + 네온 조합
 // 자체가 지금 가장 흔한 AI 랜딩 룩이기 때문.
 import { motion, useReducedMotion } from 'framer-motion'
-import { brand, heroStats } from '../content'
+import { brand, hero } from '../content'
+import { sampleReportHref } from '../lang'
 import ReportSheet from './ReportSheet'
 
 export default function Hero() {
@@ -18,13 +19,11 @@ export default function Hero() {
         {/* 좌: 카피 */}
         <motion.div {...enter}>
           <h1 className="text-balance font-display text-[40px] font-extrabold leading-[1.06] tracking-tightest sm:text-[56px] lg:text-[62px]">
-            공장을 고르는 순간,<br />탄소가 줄어듭니다.
+            {hero.h1a}<br />{hero.h1b}
           </h1>
 
           <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-paper/65 sm:text-[17px]">
-            베트남 제조사 30곳+의 에너지효율을 데이터로 비교하고, 제품 사양만 입력하면
-            ISO 14067 기반 탄소발자국을 즉시 산정합니다. 저탄소 공장 선택부터 CBAM·ESG
-            리포트까지, 한 흐름으로.
+            {hero.body}
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-7">
@@ -32,19 +31,19 @@ export default function Hero() {
               href="#contact"
               className="rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-colors hover:bg-signal-dim"
             >
-              베타 신청하기
+              {hero.cta}
             </a>
             <a
               href="#how"
               className="text-[15px] font-medium text-paper/70 underline-offset-4 transition-colors hover:text-paper hover:underline"
             >
-              어떻게 계산하나요
+              {hero.how}
             </a>
           </div>
 
           {/* 지표 — 알약 칩이 아니라 괘선 한 줄 위의 조용한 행 */}
           <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-paper/15 pt-6">
-            {heroStats.map((s) => (
+            {hero.stats.map((s) => (
               <div key={s.label}>
                 <dd className="flex items-baseline gap-0.5">
                   <span className="tabular font-display text-[26px] font-bold tracking-tight text-paper sm:text-[30px]">
@@ -66,10 +65,10 @@ export default function Hero() {
           {/* 구매자가 진짜 보고 싶은 건 설명이 아니라 산정서 한 장이다 — 바로 열어준다. */}
           <p className="mt-4 text-center text-[12px] text-paper/40">
             <a
-              href="/sample-report/"
+              href={sampleReportHref}
               className="font-medium text-paper/60 underline underline-offset-4 transition-colors hover:text-paper"
             >
-              예시 산정서 전체 보기
+              {hero.sample}
             </a>
             <span className="mx-2 text-paper/25">·</span>
             {brand.taglineEn}

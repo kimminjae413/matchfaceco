@@ -13,12 +13,12 @@ export default function Team() {
     <section id="team" className="border-t border-ink/10 bg-paper-2/50 py-28 md:py-40">
       <div className="wrap">
         <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
-          <div className="label">만드는 사람</div>
+          <div className="label">{team.label}</div>
 
           <div className="mt-10 grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:gap-24">
             <div>
               <h2 className="max-w-2xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest text-ink sm:text-[44px]">
-                공장을 직접 돌려본 사람이<br />만듭니다.
+                {team.h2a}<br />{team.h2b}
               </h2>
 
               <p className="mt-8 max-w-xl text-[17px] leading-[1.8] text-ink/65">{team.motive}</p>
@@ -26,23 +26,25 @@ export default function Team() {
               {/* 대표·법인 — 검증 가능한 사실만. 사업자등록증 표기 그대로. */}
               <dl className="mt-12 grid max-w-xl gap-x-8 gap-y-5 border-t border-ink/12 pt-8 text-[14px] sm:grid-cols-2">
                 <div className="flex gap-5">
-                  <dt className="w-14 shrink-0 text-cool">대표</dt>
+                  <dt className="w-16 shrink-0 text-cool">{team.ceoLabel}</dt>
                   <dd className="font-semibold text-ink">{company.ceo}</dd>
                 </div>
                 <div className="flex gap-5">
-                  <dt className="w-14 shrink-0 text-cool">법인</dt>
+                  <dt className="w-16 shrink-0 text-cool">{team.corpLabel}</dt>
                   <dd className="text-ink/75">
                     {company.legal}
-                    <span className="ml-1.5 text-cool">({company.since} 설립)</span>
+                    <span className="ml-1.5 text-cool">
+                      ({company.since} {team.founded})
+                    </span>
                   </dd>
                 </div>
                 <div className="flex gap-5">
-                  <dt className="w-14 shrink-0 text-cool">거점</dt>
-                  <dd className="text-ink/75">대전 · 베트남</dd>
+                  <dt className="w-16 shrink-0 text-cool">{team.baseLabel}</dt>
+                  <dd className="text-ink/75">{team.base}</dd>
                 </div>
                 <div className="flex gap-5">
-                  <dt className="w-14 shrink-0 text-cool">단계</dt>
-                  <dd className="text-ink/75">베타 준비 — 파운딩 파트너 모집</dd>
+                  <dt className="w-16 shrink-0 text-cool">{team.stageLabel}</dt>
+                  <dd className="text-ink/75">{team.stage}</dd>
                 </div>
               </dl>
             </div>

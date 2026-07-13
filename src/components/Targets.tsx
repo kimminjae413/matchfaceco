@@ -4,22 +4,22 @@
 // 일정의 번호는 실제 순서를 뜻하므로 남긴다.
 import { motion } from 'framer-motion'
 import { fade, viewportOnce } from '../lib/motion'
-import { targets, timeline } from '../content'
+import { targets } from '../content'
 
 export default function Targets() {
   return (
     <section className="bg-ink py-28 text-paper md:py-40">
       <div className="wrap">
         <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
-          <div className="label-light">누구를 위한 것인가</div>
+          <div className="label-light">{targets.label}</div>
 
           <h2 className="mt-10 max-w-3xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest sm:text-[46px]">
-            규제가 발등의 불이 된 팀을 위해.
+            {targets.h2}
           </h2>
 
           <div className="mt-16 grid gap-12 md:grid-cols-3 md:gap-10">
-            {targets.map((t) => (
-              <article key={t.tag} className="border-t border-paper/20 pt-6">
+            {targets.items.map((t) => (
+              <article key={t.title} className="border-t border-paper/20 pt-6">
                 <h3 className="font-display text-[18px] font-bold leading-[1.45] tracking-tight text-paper">
                   {t.title}
                 </h3>
@@ -30,13 +30,13 @@ export default function Targets() {
 
           {/* 추진 일정 — 순서가 정보인 구간이라 번호를 유지한다 */}
           <div className="mt-28">
-            <div className="label-light">추진 일정 · 2026</div>
+            <div className="label-light">{targets.timelineLabel}</div>
             <h3 className="mt-8 font-display text-[24px] font-bold tracking-tightest sm:text-[30px]">
-              기획에서 상용화까지, 7개월.
+              {targets.timelineH3}
             </h3>
 
             <dl className="mt-10">
-              {timeline.map((t, i) => (
+              {targets.timeline.map((t, i) => (
                 <div
                   key={t.phase}
                   className="grid gap-2 border-t border-paper/15 py-5 sm:grid-cols-[3rem_7rem_1fr] sm:items-baseline sm:gap-6"

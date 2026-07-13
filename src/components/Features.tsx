@@ -11,18 +11,15 @@ export default function Features() {
     <section id="features" className="border-t border-ink/10 bg-paper py-28 md:py-40">
       <div className="wrap">
         <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
-          <div className="label">핵심 기능</div>
+          <div className="label">{features.label}</div>
 
           <h2 className="mt-10 max-w-3xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest text-ink sm:text-[46px]">
-            네 가지 기능이 하나의 흐름으로 이어집니다.
+            {features.h2}
           </h2>
-          <p className="mt-6 max-w-2xl text-[17px] leading-[1.75] text-ink/55">
-            공장을 고르고, 탄소를 계산하고, 생산을 관리하고, 규제에 대응하는 일이 각각의
-            도구로 흩어져 있었습니다. matchfac eco는 이 전 과정을 한 데이터 위에 올립니다.
-          </p>
+          <p className="mt-6 max-w-2xl text-[17px] leading-[1.75] text-ink/55">{features.sub}</p>
 
           <div className="mt-20">
-            {features.map((f, i) => (
+            {features.items.map((f, i) => (
               <article
                 key={f.id}
                 className="grid gap-6 border-t border-ink/12 py-12 md:grid-cols-[5rem_1fr_1fr] md:gap-10 md:py-14"
