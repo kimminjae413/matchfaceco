@@ -1,69 +1,69 @@
-// 경쟁 비교표 — matchfac eco 열을 강조한 라이트 톤 매트릭스.
+// 경쟁 비교표.
+// 기존에는 matchfac eco 열 전체에 진한 bg-deep 을 깔고 헤더 셀을 rounded-t 로 띄워서,
+// 스크롤 중 고정 내비 아래로 파고들며 열 머리가 잘려 보이는 결함이 있었다.
+// 배경을 아주 옅은 면으로 낮추고 강조는 글자 굵기와 색으로만 준다.
+// ✓/✗ 아이콘도 '지원 / 없음' 이라는 말로 바꾼다 — 표는 읽는 것이지 해독하는 게 아니다.
 import { motion } from 'framer-motion'
-import { fadeUp, stagger, viewportOnce } from '../lib/motion'
+import { fade, viewportOnce } from '../lib/motion'
 import { comparison } from '../content'
-import { IconCheck, IconX } from './icons'
 
 function Cell({ v, own }: { v: string | boolean; own: boolean }) {
-  if (v === true) return <IconCheck className={`mx-auto h-5 w-5 ${own ? 'text-signal' : 'text-ink/40'}`} />
-  if (v === false) return <IconX className="mx-auto h-4.5 w-4.5 text-ink/20" />
-  return <span className={`text-[13px] ${own ? 'font-semibold text-paper' : 'text-ink/60'}`}>{v}</span>
+  if (v === true) return <span className={own ? 'font-semibold text-ink' : 'text-ink/50'}>지원</span>
+  if (v === false) return <span className="text-ink/25">없음</span>
+  return <span className={own ? 'font-semibold text-ink' : 'text-ink/55'}>{v}</span>
 }
 
 export default function Comparison() {
   return (
-    <section className="bg-paper py-24 md:py-32">
+    <section className="border-t border-ink/10 bg-paper py-28 md:py-40">
       <div className="wrap">
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce} className="mb-12 max-w-2xl">
-          <motion.span variants={fadeUp} className="eyebrow">Why matchfac eco</motion.span>
-          <motion.h2 variants={fadeUp} className="mt-4 text-[30px] font-bold leading-[1.2] tracking-tight text-ink sm:text-[40px]">
-            매칭 플랫폼도, ESG SaaS도 하지 못하던 일.
-          </motion.h2>
-        </motion.div>
+        <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
+          <div className="label">차별점</div>
 
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="overflow-x-auto"
-        >
-          <table className="w-full min-w-[680px] border-separate border-spacing-0">
-            <thead>
-              <tr>
-                <th className="w-[26%] py-4 pr-4 text-left align-bottom text-[13px] font-medium text-cool" />
-                {comparison.cols.map((c, i) => {
-                  const own = i === 2
-                  return (
-                    <th
-                      key={c}
-                      className={`px-4 py-4 text-center align-bottom ${
-                        own ? 'rounded-t-2xl bg-deep text-paper' : 'text-ink/70'
-                      }`}
-                    >
-                      <span className={`text-[14px] font-semibold ${own ? 'text-paper' : ''}`}>{c}</span>
-                    </th>
-                  )
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {comparison.rows.map((r, ri) => (
-                <tr key={r.label}>
-                  <td className="border-t border-ink/8 py-4 pr-4 text-[14px] font-medium text-ink">{r.label}</td>
-                  <td className="border-t border-ink/8 px-4 py-4 text-center"><Cell v={r.a} own={false} /></td>
-                  <td className="border-t border-ink/8 px-4 py-4 text-center"><Cell v={r.b} own={false} /></td>
-                  <td
-                    className={`bg-deep px-4 py-4 text-center ${
-                      ri === comparison.rows.length - 1 ? 'rounded-b-2xl' : ''
-                    }`}
-                  >
-                    <Cell v={r.c} own />
-                  </td>
+          <h2 className="mt-10 max-w-3xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest text-ink sm:text-[46px]">
+            매칭 플랫폼도, ESG SaaS도 하지 못하던 일.
+          </h2>
+
+          <div className="mt-14 overflow-x-auto">
+            <table className="w-full min-w-[720px] border-collapse">
+              <thead>
+                <tr className="border-b border-ink/15">
+                  <th className="w-[22%] py-5 pr-4 text-left" />
+                  {comparison.cols.map((c, i) => {
+                    const own = i === 2
+                    return (
+                      <th
+                        key={c}
+                        className={`px-4 py-5 text-left text-[13px] font-semibold ${
+                          own ? 'bg-ink/[0.04] text-ink' : 'text-cool'
+                        }`}
+                      >
+                        {c}
+                      </th>
+                    )
+                  })}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {comparison.rows.map((r) => (
+                  <tr key={r.label} className="border-b border-ink/10">
+                    <td className="py-5 pr-4 align-top text-[14px] font-semibold text-ink">
+                      {r.label}
+                    </td>
+                    <td className="px-4 py-5 align-top text-[14px] leading-relaxed">
+                      <Cell v={r.a} own={false} />
+                    </td>
+                    <td className="px-4 py-5 align-top text-[14px] leading-relaxed">
+                      <Cell v={r.b} own={false} />
+                    </td>
+                    <td className="bg-ink/[0.04] px-4 py-5 align-top text-[14px] leading-relaxed">
+                      <Cell v={r.c} own />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -14,23 +14,33 @@ export const company = {
   ceo: '정희진',
   bizNo: '142-88-03653',
   corpNo: '160111-0073236',
-  addr: '대전광역시 서구 정림동로7번길 28-12, 3층',
+  // 사업자등록증(2026.06.01 발급) 표기 그대로
+  addr: '대전광역시 서구 정림동로7번길 28-12, 3층 (정림동, 수밋들어울림플랫폼)',
   since: '2025.11.10',
 }
 
-// 히어로 옆 "탄소 원장" 터미널에 타이핑될 라인들
-export const ledgerLines = [
-  { t: 'match', k: '공정: 사출 · 소재: PP · 수량: 120,000 EA', v: '' },
-  { t: 'scan', k: '베트남 제조사 32곳 에너지효율 스캔', v: '32 factories' },
-  { t: 'pick', k: '최적 저탄소 공장 선정 → GreenFactory', v: '−18.6% CO₂' },
-  { t: 'calc', k: 'PCF = Σ(Activity Data × Emission Factor)', v: 'ISO 14067' },
-  { t: 'ef', k: '전력 배출계수 매핑 (VN grid)', v: '0.56 kgCO₂e/kWh' },
-  { t: 'done', k: '탄소 리포트 자동 생성', v: 'CBAM ready' },
-]
+// 히어로 산출물 — 이 제품이 실제로 발행하는 PCF 산정서 예시.
+// (기존 개발자 터미널 목업을 대체. 구매·ESG 담당자가 사려는 물건은 '문서'다.)
+export const reportSample = {
+  docNo: 'PCF-2026-0413',
+  spec: [
+    { k: '공정', v: '사출' },
+    { k: '소재', v: 'PP' },
+    { k: '수량', v: '120,000 EA' },
+  ],
+  factories: [
+    { name: 'GreenFactory Bình Dương', kwh: '412', re: '38%', pcf: '0.42', pick: true },
+    { name: 'Long An Precision', kwh: '486', re: '12%', pcf: '0.49' },
+    { name: 'Đồng Nai Molding', kwh: '523', re: '0%', pcf: '0.56' },
+    { name: 'Hải Phòng Industrial', kwh: '571', re: '5%', pcf: '0.62' },
+  ],
+  cut: '18.6',
+}
 
-// 히어로 우측 상단 지표 칩
+// 히어로 지표 — 서비스소개 문서의 "베트남 제조사 30개 이상" 기준으로 통일한다.
+// (기존에 히어로만 32곳, 다른 섹션은 30곳+ 으로 서로 어긋나 있었음)
 export const heroStats = [
-  { label: '베트남 제조사 DB', value: '32', unit: '곳+' },
+  { label: '베트남 제조사 DB', value: '30', unit: '곳+' },
   { label: '평균 탄소 저감', value: '18.6', unit: '%' },
   { label: '적용 표준', value: 'ISO', unit: '14067' },
 ]
@@ -66,20 +76,14 @@ export const features = [
   },
 ]
 
-// 대시보드 쇼케이스 지표 — 생산 파이프라인(시제품→양산→검수→물류→PCF→리포트) 상태 예시.
-// 실적성 허수(누적 매칭액 등) 대신, 제품이 실제로 보여주는 운영 상태를 예시 데이터로 표현.
-// 다른 섹션(히어로·VisualBand)의 30곳·18.6% 같은 대표 수치와 중복되지 않도록 의도적으로 분리.
-export const dashboardMetrics = [
-  { label: '진행 중 매칭', value: 24, suffix: '건', delta: '진행중', hero: true },
-  { label: '검수 통과', value: 42, suffix: '건', delta: '검수완료' },
-  { label: 'PCF 산정 완료', value: 156, suffix: '건', delta: 'ISO 14067' },
-  { label: '리포트 발행', value: 89, suffix: '건', delta: 'CBAM' },
-]
-
-export const emissionBars = [
-  { m: '1월', v: 42 }, { m: '2월', v: 55 }, { m: '3월', v: 48 },
-  { m: '4월', v: 61 }, { m: '5월', v: 100, peak: true }, { m: '6월', v: 72 },
-  { m: '7월', v: 58 }, { m: '8월', v: 66 }, { m: '9월', v: 51 },
+// 대시보드가 관리하는 4단계 — 누적 실적 카운트를 쓰지 않는다.
+// 2026 Q3 베타 오픈 전이라 "PCF 산정 완료 156건" 같은 숫자는 존재할 수 없고,
+// 그런 허수는 탄소 데이터 제품의 신뢰를 정면으로 깎는다. 기능 상태 표기로 대체.
+export const dashboardStages = [
+  { label: '매칭', body: '공정·수량 입력 → 저탄소 공장 추천', tag: '에너지효율 DB', hero: true },
+  { label: '생산', body: '시제품 → 양산 → 검수 진행 추적', tag: '실시간' },
+  { label: '산정', body: '제품탄소발자국 자동 계산', tag: 'ISO 14067' },
+  { label: '리포트', body: '공시용 산정서 생성·다운로드', tag: 'CBAM' },
 ]
 
 // 경쟁 비교표

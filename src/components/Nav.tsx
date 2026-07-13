@@ -1,7 +1,6 @@
 // 상단 고정 내비게이션 — 최상단(다크 히어로 위)은 라이트, 스크롤 시 페이퍼 배경 + 다크.
 import { useEffect, useState } from 'react'
 import { LogoLockup } from './Wordmark'
-import { IconArrow } from './icons'
 import { brand } from '../content'
 
 const links = [
@@ -43,14 +42,14 @@ export default function Nav() {
             </a>
           ))}
         </nav>
+        {/* 문의 폼으로 보낸다 — 빈 메일 창을 열어주면 회사·공정·수량이 오지 않는다 */}
         <a
-          href={`mailto:${brand.email}?subject=matchfac eco 베타 신청`}
-          className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold transition-colors ${
-            scrolled ? 'bg-ink text-paper hover:bg-deep' : 'bg-signal text-ink hover:bg-signal/90'
+          href="#contact"
+          className={`rounded-full px-4 py-2 text-[13px] font-semibold transition-colors ${
+            scrolled ? 'bg-ink text-paper hover:bg-deep' : 'bg-signal text-ink hover:bg-signal-dim'
           }`}
         >
           베타 신청
-          <IconArrow className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </a>
       </div>
     </header>

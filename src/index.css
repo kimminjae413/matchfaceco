@@ -40,21 +40,22 @@
     @apply mx-auto w-full max-w-wrap px-6 md:px-8;
   }
 
-  /* 섹션 상단 eyebrow 라벨 — 모노스페이스로 데이터 감성 */
-  .eyebrow {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-signal-dim;
+  /* 섹션 라벨 — 영어 대문자 모노 아이브로(THE PROBLEM 등)를 걷어낸다.
+     한국어 페이지에 영어 대문자 트래킹 라벨은 템플릿 냄새의 핵심이었다.
+     조용한 한국어 라벨 + 괘선으로 대체. */
+  .label {
+    @apply flex items-center gap-3 text-[13px] font-medium text-cool;
   }
-
-  .eyebrow-light {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-signal;
+  .label::after {
+    content: '';
+    @apply h-px flex-1 bg-ink/10;
   }
-
-  /* 탄소 그리드 배경 (히어로) */
-  .carbon-grid {
-    background-image:
-      linear-gradient(rgba(49, 236, 87, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(49, 236, 87, 0.05) 1px, transparent 1px);
-    background-size: 64px 64px;
+  .label-light {
+    @apply flex items-center gap-3 text-[13px] font-medium text-paper/45;
+  }
+  .label-light::after {
+    content: '';
+    @apply h-px flex-1 bg-paper/15;
   }
 
   .tabular {

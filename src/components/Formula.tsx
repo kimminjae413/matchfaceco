@@ -1,80 +1,83 @@
-// 방법론 & 표준 섹션 — PCF 산정식, 배출계수 출처, 적용 국제 표준을 투명하게 공개.
-// 히어로의 '탄소 원장' 파이프라인과 역할을 분리한다: 히어로=흐름 서사, 여기=산정 근거·표준.
-// 탄소 도메인 신뢰(그린워싱 방지)의 핵심은 방법론 투명성이라는 리서치 결론을 반영.
+// 방법론 & 표준 — 탄소 도메인에서 신뢰는 '산정 근거를 다 까놓는 것'에서 나온다.
+// 알약 태그와 모노 배지를 걷어내고, 실제 산정 명세서처럼 정의목록(dl)과 괘선으로 조판한다.
+//
+// 배출계수: 기존에는 "VN 0.56" 이라는 수치만 있고 어느 문서에서 나온 값인지 근거가 없었다.
+// 검증 불가능한 수치를 단정해 적는 것이 그린워싱 의심의 출발점이므로, 확인 전까지는
+// '정부 공표 국가 계수를 적용한다'는 검증 가능한 사실만 쓴다.
 import { motion } from 'framer-motion'
-import { fadeUp, stagger, viewportOnce } from '../lib/motion'
+import { fade, viewportOnce } from '../lib/motion'
 
 const factors = [
-  { k: '전력', v: '국가별 grid 배출계수', tag: 'VN 0.56 / KR' },
-  { k: '소재', v: '소재별 탄소계수 DB', tag: 'PP · PE · …' },
-  { k: '물류', v: '운송수단별 배출계수', tag: 'Sea · Air · Road' },
+  { k: '전력', v: '국가별 grid 배출계수', src: '베트남·한국 정부 공표 계수' },
+  { k: '소재', v: '소재별 탄소계수 DB', src: 'PP · PE · ABS …' },
+  { k: '물류', v: '운송수단별 배출계수', src: '해상 · 항공 · 육상' },
 ]
-const principles = ['관련성', '완전성', '일관성', '투명성', '정확성']
+
+const standards = [
+  { k: 'ISO 14067', v: '제품단위 탄소배출량 산정 기준' },
+  { k: 'GHG Protocol', v: '관련성 · 완전성 · 일관성 · 투명성 · 정확성' },
+  { k: 'CBAM', v: '탄소국경조정제도 제출 형식 대응' },
+]
 
 export default function Formula() {
   return (
-    <section id="how" className="bg-paper py-24 md:py-32">
+    <section id="how" className="border-t border-ink/10 bg-paper py-28 md:py-40">
       <div className="wrap">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          {/* 좌: 공식 + 산정 경계 + 투명성 원칙 */}
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce}>
-            <motion.span variants={fadeUp} className="eyebrow">Methodology &amp; Standards · ISO 14067</motion.span>
-            <motion.h2 variants={fadeUp} className="mt-4 text-[30px] font-bold leading-[1.2] tracking-tight text-ink sm:text-[38px]">
-              추정이 아니라,<br />공개된 표준으로 계산합니다.
-            </motion.h2>
+        <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
+          <div className="label">방법론 · ISO 14067</div>
 
-            <motion.div variants={fadeUp} className="mt-8 rounded-2xl border border-ink/10 bg-white p-6 shadow-card">
-              <div className="font-mono text-[13px] text-cool">Product Carbon Footprint</div>
-              <div className="mt-3 whitespace-nowrap font-mono text-[17px] font-bold leading-tight text-ink sm:text-[22px]">
-                PCF = <span className="text-signal-dim">Σ</span>(Activity <span className="text-cool">×</span> Factor)
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <span className="rounded-lg bg-ink/6 px-3 py-1.5 font-mono text-[12px] text-ink/70">Scope 2 · 제조</span>
-                <span className="rounded-lg bg-ink/6 px-3 py-1.5 font-mono text-[12px] text-ink/70">Scope 3 · 물류 일부</span>
-              </div>
-            </motion.div>
+          <h2 className="mt-10 max-w-3xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest text-ink sm:text-[46px]">
+            추정이 아니라, 공개된 표준으로 계산합니다.
+          </h2>
 
-            <motion.p variants={fadeUp} className="mt-6 text-[15px] leading-relaxed text-ink/65">
-              모든 산정은 <span className="font-semibold text-ink">공개된 국제 표준과 검증 가능한 배출계수</span>에 근거합니다.
-              임의 추정이나 비공개 가중치를 쓰지 않으며, 전주기 중 탄소 비중이 가장 큰 제조·운송 단계에 집중한 경량 PCF 로직입니다.
-            </motion.p>
-          </motion.div>
+          {/* 산정식 — 이 페이지의 유일한 수식. 크게, 조용하게. */}
+          <div className="mt-16 border-y border-ink/15 py-12">
+            <div className="text-[13px] text-cool">제품탄소발자국</div>
+            <div className="mt-4 font-display text-[24px] font-extrabold tracking-tightest text-ink sm:text-[38px]">
+              PCF = Σ (Activity Data × Emission Factor)
+            </div>
+            <div className="mt-5 text-[14px] text-ink/50">
+              산정 경계 — 제조 Scope 2 + 물류 일부 Scope 3
+            </div>
+          </div>
 
-          {/* 우: 배출계수 출처 + 적용 표준 */}
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce} className="space-y-4">
-            <motion.div variants={fadeUp} className="rounded-2xl border border-ink/8 bg-white p-6 shadow-card">
-              <div className="font-mono text-[10px] tracking-widest text-cool">EMISSION FACTORS · 배출계수 출처</div>
-              <div className="mt-4 space-y-2.5">
+          <p className="mt-12 max-w-2xl text-[17px] leading-[1.8] text-ink/65">
+            모든 산정은{' '}
+            <span className="font-semibold text-ink">공개된 국제 표준과 검증 가능한 배출계수</span>에
+            근거합니다. 임의 추정이나 비공개 가중치를 쓰지 않으며, 전주기 중 탄소 비중이 가장
+            큰 제조·운송 단계에 집중한 경량 PCF 로직입니다.
+          </p>
+
+          {/* 배출계수 출처 + 적용 표준 */}
+          <div className="mt-20 grid gap-16 lg:grid-cols-2 lg:gap-24">
+            <div>
+              <div className="label">배출계수 출처</div>
+              <dl className="mt-8">
                 {factors.map((f) => (
-                  <div key={f.k} className="flex items-center justify-between gap-3 rounded-xl border border-ink/8 bg-paper/60 px-4 py-3">
-                    <div>
-                      <span className="text-[14px] font-semibold text-ink">{f.k}</span>
-                      <span className="ml-2 text-[13px] text-ink/60">{f.v}</span>
-                    </div>
-                    <span className="shrink-0 rounded-full bg-signal/12 px-2.5 py-1 font-mono text-[11px] text-signal-dim">{f.tag}</span>
+                  <div key={f.k} className="grid grid-cols-[4rem_1fr] gap-4 border-t border-ink/12 py-5">
+                    <dt className="text-[14px] font-semibold text-ink">{f.k}</dt>
+                    <dd>
+                      <div className="text-[14px] text-ink/70">{f.v}</div>
+                      <div className="mt-1 text-[13px] text-cool">{f.src}</div>
+                    </dd>
                   </div>
                 ))}
-              </div>
-            </motion.div>
+              </dl>
+            </div>
 
-            <motion.div variants={fadeUp} className="rounded-2xl border border-ink/8 bg-white p-6 shadow-card">
-              <div className="font-mono text-[10px] tracking-widest text-cool">STANDARDS · 적용 표준</div>
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                <span className="rounded-lg bg-ink px-3 py-1.5 font-mono text-[12px] font-medium text-paper">ISO 14067</span>
-                <span className="rounded-lg bg-ink/6 px-3 py-1.5 font-mono text-[12px] text-ink/70">GHG Protocol</span>
-                <span className="rounded-lg bg-ink/6 px-3 py-1.5 font-mono text-[12px] text-ink/70">CBAM ready</span>
-              </div>
-              <div className="mt-5">
-                <div className="text-[12px] text-cool">GHG Protocol 5원칙</div>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {principles.map((p) => (
-                    <span key={p} className="rounded-full border border-ink/10 bg-paper/70 px-2.5 py-1 text-[12px] text-ink/70">{p}</span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
+            <div>
+              <div className="label">적용 표준</div>
+              <dl className="mt-8">
+                {standards.map((s) => (
+                  <div key={s.k} className="grid grid-cols-[8rem_1fr] gap-4 border-t border-ink/12 py-5">
+                    <dt className="text-[14px] font-semibold text-ink">{s.k}</dt>
+                    <dd className="text-[14px] leading-relaxed text-ink/70">{s.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -1,50 +1,57 @@
-// 타깃 고객 3 + 추진 일정 — 누구를 위한 것인지와 로드맵을 함께 보여준다.
+// 타깃 고객 3 + 추진 일정.
+// EXPORT SME / OVERSEAS OEM / D2C FOUNDER 같은 영어 대문자 태그를 걷어낸다 —
+// 한국 제조기업 담당자에게 영어 코드네임은 정보가 아니라 장식이었다.
+// 일정의 번호는 실제 순서를 뜻하므로 남긴다.
 import { motion } from 'framer-motion'
-import { fadeUp, stagger, viewportOnce } from '../lib/motion'
+import { fade, viewportOnce } from '../lib/motion'
 import { targets, timeline } from '../content'
 
 export default function Targets() {
   return (
-    <section className="bg-ink py-24 text-paper md:py-32">
+    <section className="bg-ink py-28 text-paper md:py-40">
       <div className="wrap">
-        {/* 타깃 */}
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce} className="max-w-2xl">
-          <motion.span variants={fadeUp} className="eyebrow-light">Who it's for</motion.span>
-          <motion.h2 variants={fadeUp} className="mt-4 text-[30px] font-bold leading-[1.2] tracking-tight sm:text-[38px]">
+        <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
+          <div className="label-light">누구를 위한 것인가</div>
+
+          <h2 className="mt-10 max-w-3xl text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest sm:text-[46px]">
             규제가 발등의 불이 된 팀을 위해.
-          </motion.h2>
-        </motion.div>
+          </h2>
 
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-12 grid gap-4 md:grid-cols-3">
-          {targets.map((t) => (
-            <motion.div key={t.tag} variants={fadeUp} className="rounded-2xl border border-paper/10 bg-white/[0.03] p-6">
-              <span className="inline-block rounded-md bg-signal/12 px-2 py-1 font-mono text-[11px] tracking-wider text-signal">{t.tag}</span>
-              <h3 className="mt-4 text-[17px] font-bold leading-snug text-paper">{t.title}</h3>
-              <p className="mt-2.5 text-[14px] leading-relaxed text-paper/55">{t.body}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* 추진 일정 */}
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={viewportOnce} className="mt-20">
-          <motion.span variants={fadeUp} className="eyebrow-light">Roadmap · 2026</motion.span>
-          <motion.h3 variants={fadeUp} className="mt-3 text-[22px] font-bold sm:text-[26px]">기획에서 상용화까지, 7개월.</motion.h3>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {timeline.map((t, i) => (
-              <motion.div
-                key={t.phase}
-                variants={fadeUp}
-                className="relative rounded-2xl border border-paper/10 bg-white/[0.02] p-5"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[12px] font-bold text-signal">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="font-mono text-[10px] text-paper/40">{t.period}</span>
-                </div>
-                <h4 className="mt-3 text-[15px] font-bold text-paper">{t.phase}</h4>
-                <p className="mt-1.5 text-[12.5px] leading-relaxed text-paper/50">{t.body}</p>
-              </motion.div>
+          <div className="mt-16 grid gap-12 md:grid-cols-3 md:gap-10">
+            {targets.map((t) => (
+              <article key={t.tag} className="border-t border-paper/20 pt-6">
+                <h3 className="font-display text-[18px] font-bold leading-[1.45] tracking-tight text-paper">
+                  {t.title}
+                </h3>
+                <p className="mt-3 text-[14px] leading-[1.75] text-paper/55">{t.body}</p>
+              </article>
             ))}
+          </div>
+
+          {/* 추진 일정 — 순서가 정보인 구간이라 번호를 유지한다 */}
+          <div className="mt-28">
+            <div className="label-light">추진 일정 · 2026</div>
+            <h3 className="mt-8 font-display text-[24px] font-bold tracking-tightest sm:text-[30px]">
+              기획에서 상용화까지, 7개월.
+            </h3>
+
+            <dl className="mt-10">
+              {timeline.map((t, i) => (
+                <div
+                  key={t.phase}
+                  className="grid gap-2 border-t border-paper/15 py-5 sm:grid-cols-[3rem_7rem_1fr] sm:items-baseline sm:gap-6"
+                >
+                  <div className="tabular font-display text-[14px] font-bold text-paper/30">
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                  <dt className="font-display text-[15px] font-bold text-paper">{t.phase}</dt>
+                  <dd className="flex flex-wrap items-baseline gap-x-4 text-[14px] text-paper/55">
+                    <span>{t.body}</span>
+                    <span className="tabular text-[13px] text-paper/35">{t.period}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </motion.div>
       </div>

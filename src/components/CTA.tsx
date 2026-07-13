@@ -1,69 +1,161 @@
-// 최종 전환 섹션 — 문의 이메일로 유도하는 그린 밴드.
+// 최종 전환 섹션 — 구조화된 문의 폼.
+//
+// 기존에는 전환 수단이 mailto: 링크 하나뿐이었다. B2B 리드는 회사·담당자·공정·수량이
+// 있어야 영업이 가능한데, 빈 메일 창을 열어주면 그 정보는 오지 않는다.
+// GitHub Pages(정적 호스팅)라 서버가 없으므로, 입력값을 그대로 메일 본문으로 조립해
+// 보내는 방식으로 만든다. 나중에 Formspree/Tally 같은 엔드포인트로 갈아끼우기만 하면 된다.
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { fadeUp, stagger, viewportOnce } from '../lib/motion'
+import { fade, viewportOnce } from '../lib/motion'
 import { brand } from '../content'
-import { IconArrow, IconMail, IconLeaf } from './icons'
+
+const KAKAO_CHANNEL = 'http://pf.kakao.com/_hRxisX'
+
+const field =
+  'w-full rounded-lg border border-ink/15 bg-white px-4 py-3 text-[14px] text-ink ' +
+  'placeholder:text-ink/30 focus:border-ink/40 focus:outline-none focus:ring-2 focus:ring-ink/10'
 
 export default function CTA() {
+  const [company, setCompany] = useState('')
+  const [name, setName] = useState('')
+  const [process, setProcess] = useState('')
+  const [volume, setVolume] = useState('')
+  const [note, setNote] = useState('')
+
+  function send(e: React.FormEvent) {
+    e.preventDefault()
+    const body = [
+      `회사명: ${company}`,
+      `담당자: ${name}`,
+      `공정·품목: ${process}`,
+      `예상 수량: ${volume}`,
+      '',
+      note,
+    ].join('\n')
+    window.location.href =
+      `mailto:${brand.email}` +
+      `?subject=${encodeURIComponent(`[베타 신청] ${company || '문의'}`)}` +
+      `&body=${encodeURIComponent(body)}`
+  }
+
   return (
-    <section id="contact" className="bg-paper pb-24 pt-8 md:pb-32">
-      <div className="wrap">
-        <motion.div
-          variants={stagger}
+    <section id="contact" className="border-t border-ink/10 bg-paper py-28 md:py-40">
+      <div className="wrap grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-24">
+        <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
+          <div className="label">도입 문의</div>
+
+          <h2 className="mt-10 text-balance font-display text-[30px] font-extrabold leading-[1.14] tracking-tightest text-ink sm:text-[46px]">
+            저탄소 제조, 데이터로 시작하세요.
+          </h2>
+          <p className="mt-6 max-w-lg text-[17px] leading-[1.75] text-ink/60">
+            지금 베타를 신청하면 파운딩 파트너로서 우선 온보딩과 초기 도입 혜택을 받습니다.
+            파트너 제조사 등록도 함께 문의하세요.
+          </p>
+
+          <dl className="mt-12 space-y-5 border-t border-ink/12 pt-8 text-[14px]">
+            <div className="flex gap-6">
+              <dt className="w-20 shrink-0 text-cool">이메일</dt>
+              <dd>
+                <a
+                  href={`mailto:${brand.email}`}
+                  className="text-ink underline-offset-4 hover:underline"
+                >
+                  {brand.email}
+                </a>
+              </dd>
+            </div>
+            <div className="flex gap-6">
+              <dt className="w-20 shrink-0 text-cool">카카오톡</dt>
+              <dd>
+                <a
+                  href={KAKAO_CHANNEL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink underline-offset-4 hover:underline"
+                >
+                  matchfac eco 채널
+                </a>
+              </dd>
+            </div>
+            <div className="flex gap-6">
+              <dt className="w-20 shrink-0 text-cool">베타 오픈</dt>
+              <dd className="text-ink/70">2026 Q3 · 파운딩 파트너 모집 중</dd>
+            </div>
+          </dl>
+        </motion.div>
+
+        {/* 폼 */}
+        <motion.form
+          variants={fade}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="relative overflow-hidden rounded-[28px] bg-deep px-8 py-14 text-paper md:px-14 md:py-20"
+          onSubmit={send}
+          className="rounded-2xl border border-ink/10 bg-paper-2/60 p-7 md:p-9"
         >
-          <div className="carbon-grid absolute inset-0 opacity-40" />
-          {/* 우측 유리 사인 브랜드 이미지 (데스크톱) */}
-          <img
-            src="/brand/glass-sign.webp"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-1/2 object-cover opacity-45 [mask-image:linear-gradient(to_left,black_30%,transparent)] [-webkit-mask-image:linear-gradient(to_left,black_30%,transparent)] lg:block"
-          />
-          <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-signal/15 blur-3xl" />
-
-          <div className="relative max-w-2xl">
-            <motion.div variants={fadeUp} className="mb-5 flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/8 px-3 py-1.5">
-                <IconLeaf className="h-3.5 w-3.5 text-signal" />
-                <span className="font-mono text-[11px] tracking-wider text-signal">Your cost. Our carbon mission.</span>
-              </span>
-              <span className="rounded-full bg-signal px-3 py-1.5 font-mono text-[11px] font-semibold tracking-wider text-ink">
-                2026 Q3 베타 오픈
-              </span>
-            </motion.div>
-
-            <motion.h2 variants={fadeUp} className="text-balance text-[32px] font-bold leading-[1.15] tracking-tight sm:text-[44px]">
-              저탄소 제조, 데이터로 시작하세요.
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mt-4 text-[16px] leading-relaxed text-paper/70">
-              지금 베타를 신청하면 <span className="font-semibold text-paper">파운딩 파트너</span>로서 우선 온보딩과 초기 도입 혜택을 받습니다.
-              파트너 제조사 등록도 함께 문의하세요.
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-3">
-              <a
-                href={`mailto:${brand.email}?subject=matchfac eco 베타 신청`}
-                className="group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-transform hover:scale-[1.02]"
-              >
-                <IconMail className="h-4.5 w-4.5" />
-                베타 신청하기
-                <IconArrow className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
-                href={`mailto:${brand.email}`}
-                className="inline-flex items-center gap-2 rounded-full border border-paper/25 px-6 py-3.5 font-mono text-[14px] font-medium text-paper/85 transition-colors hover:border-paper/50"
-              >
-                <IconMail className="h-4.5 w-4.5" />
-                {brand.email}
-              </a>
-            </motion.div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="mb-2 block text-[13px] font-medium text-ink/70">회사명</span>
+              <input
+                className={field}
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="주식회사 예시"
+                required
+              />
+            </label>
+            <label className="block">
+              <span className="mb-2 block text-[13px] font-medium text-ink/70">담당자</span>
+              <input
+                className={field}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="홍길동"
+                required
+              />
+            </label>
+            <label className="block">
+              <span className="mb-2 block text-[13px] font-medium text-ink/70">공정 · 품목</span>
+              <input
+                className={field}
+                value={process}
+                onChange={(e) => setProcess(e.target.value)}
+                placeholder="사출 · PP 용기"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-2 block text-[13px] font-medium text-ink/70">예상 수량</span>
+              <input
+                className={field}
+                value={volume}
+                onChange={(e) => setVolume(e.target.value)}
+                placeholder="120,000 EA"
+              />
+            </label>
           </div>
-        </motion.div>
+
+          <label className="mt-4 block">
+            <span className="mb-2 block text-[13px] font-medium text-ink/70">문의 내용</span>
+            <textarea
+              className={`${field} min-h-[110px] resize-y`}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="CBAM 대응이 필요한 시점, 현재 생산 국가 등 알려주시면 도움이 됩니다."
+            />
+          </label>
+
+          <button
+            type="submit"
+            className="mt-6 w-full rounded-full bg-ink px-6 py-3.5 text-[15px] font-semibold text-paper transition-colors hover:bg-deep"
+          >
+            베타 신청하기
+          </button>
+
+          <p className="mt-4 text-[12px] leading-relaxed text-cool">
+            보내기를 누르면 입력하신 내용이 담긴 메일 창이 열립니다. 문의는 도입 상담 목적으로만
+            사용합니다.
+          </p>
+        </motion.form>
       </div>
     </section>
   )

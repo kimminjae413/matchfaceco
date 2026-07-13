@@ -16,9 +16,10 @@ export default {
         'paper-2': '#ECF1EA',
       },
       fontFamily: {
+        // 헤드라인 전용 얼굴. Pretendard 기본값만 쓰던 조판이 'AI가 만든 티'의 큰 축이었다.
+        display: ['"Wanted Sans Variable"', 'Pretendard', 'system-ui', 'sans-serif'],
         sans: ['Pretendard', 'Pretendard Variable', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-        round: ['Quicksand', 'Pretendard', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       maxWidth: {
         wrap: '1200px',
@@ -31,20 +32,9 @@ export default {
         tightest: '-0.04em',
       },
       boxShadow: {
+        // 컬러 글로우(glow)는 제거. 문서가 지면 위에 놓인 느낌만 남긴다.
         card: '0 1px 2px rgba(8,54,48,0.04), 0 12px 32px -12px rgba(8,54,48,0.18)',
         'card-lg': '0 2px 4px rgba(8,54,48,0.05), 0 28px 60px -24px rgba(8,54,48,0.28)',
-        glow: '0 0 0 1px rgba(49,236,87,0.25), 0 20px 60px -20px rgba(49,236,87,0.35)',
-      },
-      keyframes: {
-        'blink': { '0%,100%': { opacity: '1' }, '50%': { opacity: '0' } },
-        'drift': {
-          '0%,100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-      },
-      animation: {
-        blink: 'blink 1.1s step-end infinite',
-        drift: 'drift 7s ease-in-out infinite',
       },
     },
   },
