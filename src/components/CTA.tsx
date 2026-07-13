@@ -152,8 +152,15 @@ export default function CTA() {
           </button>
 
           <p className="mt-4 text-[12px] leading-relaxed text-cool">
-            보내기를 누르면 입력하신 내용이 담긴 메일 창이 열립니다. 문의는 도입 상담 목적으로만
-            사용합니다.
+            보내기를 누르면 입력하신 내용이 담긴 메일 창이 열립니다. 실제로 메일을 보내신 경우에만
+            내용이 전달되며, 도입 상담 목적으로만 사용합니다. 자세한 내용은{' '}
+            <a
+              href="/legal/privacy/"
+              className="text-ink/70 underline underline-offset-2 hover:text-ink"
+            >
+              개인정보처리방침
+            </a>
+            을 확인하세요.
           </p>
         </motion.form>
       </div>
