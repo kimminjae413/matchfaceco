@@ -1,6 +1,11 @@
 // 탄소 리포트 산정서 — 히어로의 주인공.
 // 기존 개발자 터미널(신호등 점 3개 + 타이핑)을 대체한다. 이 제품을 사는 사람은
 // 구매·소싱·ESG 담당자이지 개발자가 아니고, 그들이 사려는 물건은 '이 문서 한 장'이다.
+//
+// 표기 원칙: 여기 실린 제조사명·수치는 산정서 서식을 보여주기 위한 가상의 예시다.
+// 문서번호까지 붙어 있어 실제 발행본으로 읽힐 수 있으므로, 예시임을 화면에 명시한다.
+// (대시보드 허수 실적을 걷어낸 것과 같은 이유 — 탄소 데이터 제품에서 실물처럼 보이는
+// 가짜는 신뢰를 정면으로 깎는다.)
 import { reportSample } from '../content'
 
 export default function ReportSheet() {
@@ -11,14 +16,19 @@ export default function ReportSheet() {
       {/* 문서 머리말 */}
       <div className="flex items-start justify-between gap-4 border-b border-ink/10 px-6 py-4">
         <div>
-          <div className="font-display text-[15px] font-bold tracking-tight text-ink">
-            제품탄소발자국 산정서
+          <div className="flex items-center gap-2">
+            <span className="font-display text-[15px] font-bold tracking-tight text-ink">
+              제품탄소발자국 산정서
+            </span>
+            <span className="rounded-full bg-ink/5 px-2 py-0.5 text-[10px] font-medium text-ink/50">
+              예시
+            </span>
           </div>
           <div className="mt-1 text-[12px] text-cool">ISO 14067 · Scope 2 + Scope 3(물류 일부)</div>
         </div>
         <div className="shrink-0 text-right text-[11px] leading-relaxed text-cool">
           <div className="tabular">{docNo}</div>
-          <div>발행 matchfac eco</div>
+          <div>서식 예시 · 실제 발행본 아님</div>
         </div>
       </div>
 
