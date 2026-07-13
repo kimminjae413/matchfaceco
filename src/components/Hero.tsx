@@ -1,7 +1,11 @@
-// 히어로 — 브랜드 딥 포레스트 지면 위에 헤드라인이 먼저 서고, 그 옆에 제품의 산출물이 놓인다.
-// 걷어낸 것: 알약 배지 / 방사형 글로우 blob 2개 / 격자 배경 / 개발자 터미널 / 스태거 등장.
-// 다크 면은 근접 블랙(#05100C)이 아니라 BI 딥 포레스트로 올린다 — 근접 블랙 + 네온 조합
-// 자체가 지금 가장 흔한 AI 랜딩 룩이기 때문.
+// 히어로 — Veo 영상(이슬 맺힌 잎·파랑새)을 배경으로 깔고, 그 위에 헤드라인과 산정서를 세운다.
+// 다크 면은 근접 블랙(#05100C)이 아니라 BI 딥 포레스트다 — 근접 블랙 + 네온 조합 자체가
+// 지금 가장 흔한 AI 랜딩 룩이기 때문.
+//
+// 영상 위에 흰 글씨를 얹으면 대비가 무너진다. 그래서 딥 포레스트 오버레이를 두 겹 깐다:
+//   1) 브랜드 컬러 면(bg-ink/80) — 영상을 브랜드 톤으로 물들이고 명도를 눌러 글씨를 살린다
+//   2) 좌→우 그라디언트 — 헤드라인이 앉는 왼쪽을 더 어둡게, 오른쪽은 영상이 숨쉬게
+// prefers-reduced-motion 이면 영상을 재생하지 않고 poster 만 쓴다(접근성·데이터 절약).
 import { motion, useReducedMotion } from 'framer-motion'
 import { brand, hero } from '../content'
 import { sampleReportHref } from '../lang'
@@ -14,7 +18,37 @@ export default function Hero() {
     : { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.5 } }
 
   return (
-    <section id="top" className="bg-ink text-paper">
+    <section id="top" className="relative isolate overflow-hidden bg-ink text-paper">
+      {/* 배경 영상 — 자동재생·무음·루프. 로드 실패 시 poster 가 그대로 남는다. */}
+      {reduce ? (
+        <img
+          src="/brand/hero-poster.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+      ) : (
+        <video
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/brand/hero-poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/brand/hero-web.mp4" type="video/mp4" />
+        </video>
+      )}
+
+      {/* 가독성 오버레이 — 영상을 브랜드 톤으로 눌러 글씨를 살린다 */}
+      <div className="absolute inset-0 -z-10 bg-ink/80" aria-hidden="true" />
+      <div
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/85 to-ink/55"
+        aria-hidden="true"
+      />
+
       <div className="wrap grid items-center gap-14 pb-24 pt-36 md:pb-28 md:pt-40 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
         {/* 좌: 카피 */}
         <motion.div {...enter}>

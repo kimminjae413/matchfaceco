@@ -49,8 +49,16 @@ export default function Team() {
               </dl>
             </div>
 
-            {/* 보유 역량 — 알약 카드가 아니라 괘선 위의 조용한 목록 */}
+            {/* 보유 역량 — 알약 카드가 아니라 괘선 위의 조용한 목록.
+                위에 브랜드 사이니지를 얹는다. 이건 BI 목업이라 없는 사실을 주장하지 않는다 —
+                "회사가 실재한다"는 것 외에 아무 말도 하지 않는 그림이라 이 자리에 맞다. */}
             <div>
+              <img
+                src="/brand/glass-sign.webp"
+                alt="matchfac eco 브랜드 사이니지"
+                loading="lazy"
+                className="mb-10 aspect-[16/10] w-full rounded-xl object-cover shadow-card ring-1 ring-ink/10"
+              />
               <dl>
                 {team.credentials.map((c) => (
                   <div key={c.k} className="border-t border-ink/12 py-6 first:border-t-0 first:pt-0">

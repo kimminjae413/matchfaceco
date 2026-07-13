@@ -14,7 +14,22 @@ import { network } from '../content'
 
 export default function VisualBand() {
   return (
-    <section className="bg-deep py-24 text-paper md:py-32">
+    <section className="relative isolate overflow-hidden bg-deep py-24 text-paper md:py-32">
+      {/* 잎사귀 회로기판 — 자연과 데이터가 한 장에 있는 그림이라 이 밴드의 주장과 맞는다.
+          방법론(Formula) 섹션은 흰 지면이라 이 어두운 네온 이미지가 붙지 않는다.
+          같은 값을 하면서 톤이 맞는 자리가 여기(다크 밴드)다. */}
+      <img
+        src="/brand/leaf-circuit.webp"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25"
+      />
+      <div
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-deep via-deep/90 to-deep/60"
+        aria-hidden="true"
+      />
+
       <div className="wrap">
         <motion.div variants={fade} initial="hidden" whileInView="show" viewport={viewportOnce}>
           <div className="label-light">{network.label}</div>
