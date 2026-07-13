@@ -8,6 +8,7 @@ const links = [
   { href: '#how', label: '방법론' },
   { href: '#platform', label: '플랫폼' },
   { href: '#why', label: '차별점' },
+  { href: '#team', label: '만드는 사람' },
 ]
 
 export default function Nav() {

@@ -24,6 +24,7 @@ export default function Footer() {
               <a href="#how" className="text-ink/60 transition-colors hover:text-ink">작동 방식</a>
               <a href="/sample-report/" className="text-ink/60 transition-colors hover:text-ink">예시 산정서</a>
               <a href="#platform" className="text-ink/60 transition-colors hover:text-ink">플랫폼</a>
+              <a href="#team" className="text-ink/60 transition-colors hover:text-ink">만드는 사람</a>
               <a href={`mailto:${brand.email}`} className="text-ink/60 transition-colors hover:text-ink">도입 문의</a>
             </nav>
             <div className="flex flex-col gap-2.5 text-[13px] text-ink/60">

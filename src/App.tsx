@@ -10,6 +10,7 @@ import VisualBand from './components/VisualBand'
 import Platform from './components/Platform'
 import Comparison from './components/Comparison'
 import Targets from './components/Targets'
+import Team from './components/Team'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 
@@ -26,6 +27,8 @@ export default function App() {
         <Platform />
         <Comparison />
         <Targets />
+        {/* 문의 바로 앞에 "누가 만드는가"를 둔다 — 보내기 직전에 나오는 질문이다. */}
+        <Team />
         <CTA />
       </main>
       <Footer />
