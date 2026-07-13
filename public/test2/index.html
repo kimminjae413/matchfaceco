@@ -89,8 +89,12 @@
     border-bottom:1px solid var(--rule);
   }
   .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:17px}
-  .brand .leaf{width:20px;height:20px;flex:none}
+  /* 실물 BI 아트워크(심볼 + 워드마크). 임의로 그린 잎 아이콘을 쓰지 않는다. */
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .sym{height:28px;width:auto;flex:none}
+  .brand .wm{height:17px;width:auto}
+  footer .brand .sym{height:32px}
+  footer .brand .wm{height:19px}
   .nav-links{display:none;gap:32px}
   @media(min-width:768px){.nav-links{display:flex}}
   .nav-links a{font-size:14px;color:rgba(8,54,48,.6);transition:color .15s}
@@ -256,11 +260,8 @@
 <header>
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="matchfac eco 홈">
-      <svg class="leaf" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M20 4C20 4 18 14 12 18C8 20.5 4 20 4 20C4 20 4.5 13 9 9C13 5.5 20 4 20 4Z" fill="#31EC57"/>
-        <path d="M4 20C4 20 8 14 14 9" stroke="#083630" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-      matchfac eco
+      <img class="sym" src="symbol.png" alt="" aria-hidden="true" />
+      <img class="wm" src="wordmark-dark.png" alt="matchfac eco" />
     </a>
     <nav class="nav-links">
       <a href="#why">문제</a>
@@ -628,11 +629,8 @@
   <div class="wrap">
     <div class="foot">
       <div class="brand">
-        <svg class="leaf" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M20 4C20 4 18 14 12 18C8 20.5 4 20 4 20C4 20 4.5 13 9 9C13 5.5 20 4 20 4Z" fill="#31EC57"/>
-          <path d="M4 20C4 20 8 14 14 9" stroke="#083630" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        matchfac eco
+        <img class="sym" src="symbol.png" alt="" aria-hidden="true" />
+        <img class="wm" src="wordmark-dark.png" alt="matchfac eco" />
       </div>
       <div class="co">
         <b>주식회사 제로투백</b> (Zeroto100 INC.)<br />
