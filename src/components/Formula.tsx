@@ -36,6 +36,12 @@ export default function Formula() {
             {formula.bodyB}
           </p>
 
+          {/* 이 로직이 어디서 나왔는지. 별도 '팀' 섹션은 명함 네 줄에 불과해 걷어냈고,
+              내세울 수 있는 유일한 사실(36건)만 근거를 말하는 이 자리에 남긴다. */}
+          <p className="mt-6 max-w-2xl border-l-2 border-ink/15 pl-5 text-[15px] leading-[1.75] text-ink/50">
+            {formula.origin}
+          </p>
+
           {/* 배출계수 출처 + 적용 표준 */}
           <div className="mt-20 grid gap-16 lg:grid-cols-2 lg:gap-24">
             <div>

@@ -24,7 +24,6 @@ export default function Footer() {
               <a href="#how" className="text-ink/60 transition-colors hover:text-ink">{footer.how}</a>
               <a href={sampleReportHref} className="text-ink/60 transition-colors hover:text-ink">{footer.sample}</a>
               <a href="#platform" className="text-ink/60 transition-colors hover:text-ink">{footer.platform}</a>
-              <a href="#team" className="text-ink/60 transition-colors hover:text-ink">{footer.team}</a>
               <a href={`mailto:${brand.email}`} className="text-ink/60 transition-colors hover:text-ink">{footer.contact}</a>
             </nav>
             <div className="flex flex-col gap-2.5 text-[13px] text-ink/60">

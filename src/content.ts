@@ -35,7 +35,6 @@ const ko = {
       { href: '#how', label: '방법론' },
       { href: '#platform', label: '플랫폼' },
       { href: '#why', label: '차별점' },
-      { href: '#team', label: '만드는 사람' },
     ],
     cta: '베타 신청',
   },
@@ -137,6 +136,9 @@ const ko = {
     bodyA: '모든 산정은 ',
     bodyStrong: '공개된 국제 표준과 검증 가능한 배출계수',
     bodyB: '에 근거합니다. 임의 추정이나 비공개 가중치를 쓰지 않으며, 전주기 중 탄소 비중이 가장 큰 제조·운송 단계에 집중한 경량 PCF 로직입니다.',
+    origin:
+      '36건의 제조 아웃소싱 프로젝트를 직접 운영하며 마주친 데이터 공백에서 출발했습니다. ' +
+      '단가와 납기만 보고 공장을 고르는 관행 아래에서는 탄소를 셀 수 없습니다.',
     factorsLabel: '배출계수 출처',
     standardsLabel: '적용 표준',
     sampleLink: '예시 산정서 한 장 보기',
@@ -228,28 +230,6 @@ const ko = {
 
   // 팀 — 전부 사업계획서(_biz_plan.txt)·사업자등록증에 근거한 사실이다.
   // "36건" 은 사업계획서 '보유 역량'·'개발 동기'에 명시돼 있다. 확인되지 않은 경력은 쓰지 않는다.
-  team: {
-    label: '만드는 사람',
-    h2a: '공장을 직접 돌려본 사람이',
-    h2b: '만듭니다.',
-    motive:
-      '36건의 제조 아웃소싱 프로젝트를 총괄하면서, 설비 노후도와 공정 효율에 따라 벌어지는 ' +
-      '에너지 데이터의 공백을 반복해서 마주쳤습니다. 단가와 납기만 보고 공장을 고르는 관행 ' +
-      '아래에서는 탄소를 셀 수 없다는 것이 창업의 출발점입니다.',
-    ceoLabel: '대표',
-    corpLabel: '법인',
-    baseLabel: '거점',
-    stageLabel: '단계',
-    founded: '설립',
-    base: '대전 · 베트남',
-    stage: '베타 준비 — 파운딩 파트너 모집',
-    credentials: [
-      { k: '제조 실무', v: '36건', note: '제조 아웃소싱 프로젝트 운영 — 전주기 프로세스 설계' },
-      { k: '현지 네트워크', v: '30곳+', note: '베트남 제조사 네트워크 및 에너지효율 기초 DB' },
-      { k: '산정 표준', v: 'ISO 14067', note: '전과정평가 대신 활동자료 기반 경량 PCF 로직' },
-    ],
-  },
-
   cta: {
     label: '도입 문의',
     h2: '저탄소 제조, 데이터로 시작하세요.',
@@ -288,7 +268,6 @@ const ko = {
     how: '작동 방식',
     sample: '예시 산정서',
     platform: '플랫폼',
-    team: '만드는 사람',
     contact: '도입 문의',
     ceo: '대표',
     bizNo: '사업자등록번호',
@@ -323,7 +302,6 @@ const en: typeof ko = {
       { href: '#how', label: 'Methodology' },
       { href: '#platform', label: 'Platform' },
       { href: '#why', label: 'Why us' },
-      { href: '#team', label: 'Who we are' },
     ],
     cta: 'Join beta',
   },
@@ -423,6 +401,9 @@ const en: typeof ko = {
     bodyA: 'Every calculation rests on ',
     bodyStrong: 'published international standards and verifiable emission factors',
     bodyB: '. No arbitrary estimates, no undisclosed weightings — a lightweight PCF focused on the manufacturing and transport stages, where the carbon actually sits.',
+    origin:
+      'This started from the data gap we kept hitting across 36 manufacturing outsourcing projects we ran ourselves. ' +
+      'Under a sourcing culture that looks only at price and lead time, carbon simply cannot be counted.',
     factorsLabel: 'Emission factor sources',
     standardsLabel: 'Standards applied',
     sampleLink: 'See a sample report',
@@ -511,26 +492,6 @@ const en: typeof ko = {
     ],
   },
 
-  team: {
-    label: 'Who we are',
-    h2a: 'Built by someone who has',
-    h2b: 'actually run the factories.',
-    motive:
-      'Across 36 manufacturing outsourcing projects, the same gap kept surfacing: how much energy a process burns depends on how old the equipment is, and nobody was measuring it. Under a sourcing culture that looks only at price and lead time, carbon simply cannot be counted. That is where this company starts.',
-    ceoLabel: 'Founder',
-    corpLabel: 'Company',
-    baseLabel: 'Based in',
-    stageLabel: 'Stage',
-    founded: 'founded',
-    base: 'Daejeon, Korea · Vietnam',
-    stage: 'Pre-beta — recruiting founding partners',
-    credentials: [
-      { k: 'Manufacturing', v: '36', note: 'Outsourcing projects run end to end — full process design' },
-      { k: 'Local network', v: '30+', note: 'Vietnamese manufacturers and a baseline efficiency database' },
-      { k: 'Standard', v: 'ISO 14067', note: 'Activity-data PCF logic in place of a full LCA' },
-    ],
-  },
-
   cta: {
     label: 'Get in touch',
     h2: 'Start low-carbon manufacturing with data.',
@@ -569,7 +530,6 @@ const en: typeof ko = {
     how: 'How it works',
     sample: 'Sample report',
     platform: 'Platform',
-    team: 'Who we are',
     contact: 'Contact',
     ceo: 'Founder',
     bizNo: 'Business reg. no.',
@@ -592,6 +552,5 @@ export const network = t.network
 export const platform = t.platform
 export const comparison = t.comparison
 export const targets = t.targets
-export const team = t.team
 export const cta = t.cta
 export const footer = t.footer
